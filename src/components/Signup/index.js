@@ -2,12 +2,8 @@ import React, {useState} from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
-    Tabs,
-    Tab,
     CardContent,
-    CardHeader,
     Button,
-    IconButton,
     TextField,
     Typography,
   } from "@material-ui/core";
@@ -39,11 +35,11 @@ export default function Signup({onSubmit, error}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [gender, setGender] = useState("");
-    const [age, setAge] = useState(0);
+    const [age, setAge] = useState("");
     
       const submit = event => {
         event.preventDefault()
-        onSubmit({type: "signup",email, username, password})
+        onSubmit({type: "signup",email, username, password, gender, age})
       }
 
     return (
@@ -56,6 +52,14 @@ export default function Signup({onSubmit, error}) {
                 </Typography>
                 <CardContent>
                     <form className={classes.inputForm} onSubmit={submit}>
+                    <TextField 
+                        value={email} 
+                        className={classes.input} 
+                        label="email" 
+                        variant="outlined" 
+                        fullWidth
+                        onChange={e => setEmail(e.target.value)}>
+                        </TextField>
                         <TextField 
                         value={username} 
                         className={classes.input} 
@@ -76,14 +80,14 @@ export default function Signup({onSubmit, error}) {
                         <TextField 
                         value={gender} 
                         className={classes.input} 
-                        label="password" 
+                        label="gender" 
                         variant="outlined"
                         fullWidth
                         type="Gender"
                         onChange={e => setGender(e.target.value)}>
                         </TextField>
                         <TextField 
-                        value={password} 
+                        value={age} 
                         className={classes.input} 
                         label="age" 
                         variant="outlined"
