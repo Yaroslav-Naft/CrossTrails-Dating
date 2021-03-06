@@ -27,27 +27,39 @@ const useStyles = makeStyles((theme)=>({
     }
 }))
 
-export default function Login({onSubmit, error}) {
+
+export default function Signup({onSubmit, error}) {
     const classes = useStyles();
 
+    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [gender, setGender] = useState("");
+    const [age, setAge] = useState("");
     
       const submit = event => {
         event.preventDefault()
-        onSubmit({type: "login", username, password})
+        onSubmit({type: "signup",email, username, password, gender, age})
       }
 
     return (
             <Card className={classes.root}>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    Welcome!
+                    Create
                 </Typography>
                 <Typography className={classes.title} variant="h5" component="h2">
-                    Join Our Community
+                    Your Profile
                 </Typography>
                 <CardContent>
                     <form className={classes.inputForm} onSubmit={submit}>
+                    <TextField 
+                        value={email} 
+                        className={classes.input} 
+                        label="email" 
+                        variant="outlined" 
+                        fullWidth
+                        onChange={e => setEmail(e.target.value)}>
+                        </TextField>
                         <TextField 
                         value={username} 
                         className={classes.input} 
@@ -64,6 +76,24 @@ export default function Login({onSubmit, error}) {
                         fullWidth
                         type="password"
                         onChange={e => setPassword(e.target.value)}>
+                        </TextField>
+                        <TextField 
+                        value={gender} 
+                        className={classes.input} 
+                        label="gender" 
+                        variant="outlined"
+                        fullWidth
+                        type="Gender"
+                        onChange={e => setGender(e.target.value)}>
+                        </TextField>
+                        <TextField 
+                        value={age} 
+                        className={classes.input} 
+                        label="age" 
+                        variant="outlined"
+                        fullWidth
+                        type="Age"
+                        onChange={e => setAge(e.target.value)}>
                         </TextField>
                         {!!error && <Typography>{error}</Typography>}
                         <Button color="primary" type="submit" fullWidth>SUBMIT</Button>

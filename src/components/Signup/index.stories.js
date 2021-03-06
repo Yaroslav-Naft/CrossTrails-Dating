@@ -1,15 +1,15 @@
 import React from 'react'
-import Login from './index'
+import Signup from './index'
 
 import {action} from '@storybook/addon-actions'
 
 export default {
-    title: 'Login',
-    component: Login,
+    title: 'Signup',
+    component: Signup,
 }
 
 const events = action({onSumbit: 'submit'})
 
 export const Default = () => (
-    <Login {...events}></Login>
+    <Signup {...events}></Signup>
 )

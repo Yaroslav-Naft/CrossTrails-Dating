@@ -1,9 +1,10 @@
-
+// Components
+import Signup from "./components/Signup/index"
 
 function App() {
   return (
     <div className="App">
-     <p>This is client side!</p>
+     <Signup onSubmit={(data) => console.log("submit signup", data)}/>
     </div>
   );
 }
