@@ -50,7 +50,6 @@ export default function Signup({onSubmit, error}) {
               email: email
             }
           })
-
           console.log("You have sucessfully signed up")
         } catch(error) {
           console.log(`You have the following error:`)
