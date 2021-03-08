@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
@@ -11,7 +12,7 @@ import {
 const useStyles = makeStyles((theme)=>({
     root:{
         maxWidth: "400px",
-        padding: 20,
+        padding: "48px 40px",
     },
     input: {
       marginBottom: 10,
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme)=>({
     },
     inputForm: {
       '& > *': {
-        margin: "10px 0"
+        margin: "24px 0"
       },
     },
     title:{
@@ -66,8 +67,11 @@ export default function Login({onSubmit, error}) {
                         onChange={e => setPassword(e.target.value)}>
                         </TextField>
                         {!!error && <Typography>{error}</Typography>}
-                        <Button color="primary" type="submit" fullWidth>SUBMIT</Button>
+                        <Button color="primary" type="submit" fullWidth>Login</Button>
                     </form>
+                    <Typography  color="black" gutterBottom>
+                       Don't have an account? <Link>Sign up</Link>
+                    </Typography>
                 </CardContent>
             </Card>
     )
