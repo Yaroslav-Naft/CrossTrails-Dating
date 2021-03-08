@@ -52,7 +52,8 @@ export default function Signup({onSubmit, error}) {
           })
           console.log("You have sucessfully signed up")
         } catch(error) {
-          console.log(`You have the following error: ${error}`)
+          console.log(`You have the following error:`)
+          console.log(error)
         }
 
       }

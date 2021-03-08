@@ -45,7 +45,8 @@ export default function Login({onSubmit, error}) {
           })
           console.log("You have sucessfully logged In") 
         } catch (error) {
-          console.log(`You have the following error: ${error}`)
+          console.log(`You have the following error:`)
+          console.log(error)
         }
 
         onSubmit({type: "login", username, password})
