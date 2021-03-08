@@ -42,9 +42,8 @@ export default function Signup({onSubmit, error}) {
       const submit = async event => {
         event.preventDefault()
         onSubmit({type: "signup",email, username, password, gender, age})
-
         try {
-          const signUp = await Auth.signUp({
+          const signUpResponse = await Auth.signUp({
             username,
             password,
             attributes: {

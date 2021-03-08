@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import { Auth } from 'aws-amplify';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
@@ -7,6 +9,7 @@ import {
     TextField,
     Typography,
   } from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme)=>({
     root:{
@@ -33,8 +36,18 @@ export default function Login({onSubmit, error}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
-      const submit = event => {
+      const submit = async event => {
         event.preventDefault()
+        try {
+          const user = await Auth.signIn({
+            username,
+            password
+          })
+          console.log("You have sucessfully logged In") 
+        } catch (error) {
+          console.log(`You have the following error: ${error}`)
+        }
+
         onSubmit({type: "login", username, password})
       }
 
