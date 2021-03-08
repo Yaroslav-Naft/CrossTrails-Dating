@@ -9,7 +9,7 @@ const [hikerData, sethikerData] = useState([])
 
 const displaySettings = async event => {
     fetch(url + '/hikers')
-    .then(response => response.json)
+    .then(response => response.json())
     .then(data => {
         sethikerData(JSON.parse(data.body))
     })
@@ -17,11 +17,9 @@ const displaySettings = async event => {
 
 }
 
-
 useEffect(() => {
     displaySettings()
 }, [])
-
 
     return (
 <div>
@@ -30,13 +28,14 @@ useEffect(() => {
       <thead>
           <tr>
               <th>Id</th>
-              <th>First Name</th>
-              <th>Last Name</th>
+              <th>Age</th>
+              <th>Favourite Hikes</th>
             </tr>
         </thead>
         <tbody>
             {hikerData.map(hiker =>
             <tr key={hiker.hikersId}>
+                <td>{hiker.hikersId}</td>
                 <td>{hiker.age}</td>
                 <td>{hiker.favouritesHikes}</td>
             </tr>
