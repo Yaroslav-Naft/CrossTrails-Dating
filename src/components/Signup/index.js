@@ -8,6 +8,12 @@ import {
     Button,
     TextField,
     Typography,
+    FormLabel,
+    FormControlLabel,
+    RadioGroup,
+    Radio,
+    MenuItem,
+    Select
   } from "@material-ui/core";
 
 const useStyles = makeStyles((theme)=>({
@@ -38,6 +44,12 @@ export default function Signup({onSubmit, error}) {
     const [password, setPassword] = useState("");
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
+
+    const ageOptions = []
+    for (let i = 18; i < 60; i++){
+      ageOptions.push(i)
+    }
+
     
       const submit = async event => {
         event.preventDefault()
@@ -67,6 +79,7 @@ export default function Signup({onSubmit, error}) {
                 </Typography>
                 <CardContent>
                     <form className={classes.inputForm} onSubmit={submit}>
+                    <FormLabel component="legend">Email</FormLabel>
                     <TextField 
                         value={email} 
                         className={classes.input} 
@@ -75,6 +88,7 @@ export default function Signup({onSubmit, error}) {
                         fullWidth
                         onChange={e => setEmail(e.target.value)}>
                         </TextField>
+                        <FormLabel component="legend">Username</FormLabel>
                         <TextField 
                         value={username} 
                         className={classes.input} 
@@ -83,6 +97,7 @@ export default function Signup({onSubmit, error}) {
                         fullWidth
                         onChange={e => setUsername(e.target.value)}>
                         </TextField>
+                        <FormLabel component="legend">Password</FormLabel>
                         <TextField 
                         value={password} 
                         className={classes.input} 
@@ -92,24 +107,23 @@ export default function Signup({onSubmit, error}) {
                         type="password"
                         onChange={e => setPassword(e.target.value)}>
                         </TextField>
-                        <TextField 
-                        value={gender} 
-                        className={classes.input} 
-                        label="gender" 
-                        variant="outlined"
-                        fullWidth
-                        type="Gender"
-                        onChange={e => setGender(e.target.value)}>
-                        </TextField>
-                        <TextField 
-                        value={age} 
-                        className={classes.input} 
-                        label="age" 
-                        variant="outlined"
-                        fullWidth
-                        type="Age"
-                        onChange={e => setAge(e.target.value)}>
-                        </TextField>
+                        <FormLabel component="legend">Gender</FormLabel>
+                        <RadioGroup aria-label="gender" name="gender1" value={gender} onChange={e => setGender(e.target.value)}>
+                          <FormControlLabel value="female" control={<Radio />} label="Female" />
+                          <FormControlLabel value="male" control={<Radio />} label="Male" />
+                        </RadioGroup>
+                        <FormLabel component="legend">Age</FormLabel>
+                        <Select
+                          labelId="demo-simple-select-outlined-label"
+                          id="demo-simple-select-outlined"
+                          value={age}
+                          onChange={e => setAge(e.target.value)}
+                          label="Age"
+                        >
+                          {ageOptions.map((a) => {
+                            return (<MenuItem value={a}>{a}</MenuItem>)
+                          })}
+                        </Select>
                         {!!error && <Typography>{error}</Typography>}
                         <Button color="primary" type="submit" fullWidth>SUBMIT</Button>
                     </form>
