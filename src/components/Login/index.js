@@ -81,7 +81,7 @@ export default function Login({onSubmit, error}) {
                         onChange={e => setPassword(e.target.value)}>
                         </TextField>
                         {!!error && <Typography>{error}</Typography>}
-                        <Button color="primary" type="submit" fullWidth>Login</Button>
+                        <Button color="primary" type="submit" fullWidth>LOGIN</Button>
                     </form>
                     <Typography  color="black" gutterBottom>
                        Don't have an account? <Link to="/signup">Sign up</Link>
