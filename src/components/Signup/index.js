@@ -11,7 +11,9 @@ import {
     FormLabel,
     FormControlLabel,
     RadioGroup,
-    Radio
+    Radio,
+    MenuItem,
+    Select
   } from "@material-ui/core";
 
 const useStyles = makeStyles((theme)=>({
@@ -42,6 +44,12 @@ export default function Signup({onSubmit, error}) {
     const [password, setPassword] = useState("");
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
+
+    const ageOptions = []
+    for (let i = 18; i < 60; i++){
+      ageOptions.push(i)
+    }
+
     
       const submit = async event => {
         event.preventDefault()
@@ -105,15 +113,17 @@ export default function Signup({onSubmit, error}) {
                           <FormControlLabel value="male" control={<Radio />} label="Male" />
                         </RadioGroup>
                         <FormLabel component="legend">Age</FormLabel>
-                        <TextField 
-                        value={age} 
-                        className={classes.input} 
-                        label="age" 
-                        variant="outlined"
-                        fullWidth
-                        type="Age"
-                        onChange={e => setAge(e.target.value)}>
-                        </TextField>
+                        <Select
+                          labelId="demo-simple-select-outlined-label"
+                          id="demo-simple-select-outlined"
+                          value={age}
+                          onChange={e => setAge(e.target.value)}
+                          label="Age"
+                        >
+                          {ageOptions.map((a) => {
+                            return (<MenuItem value={a}>{a}</MenuItem>)
+                          })}
+                        </Select>
                         {!!error && <Typography>{error}</Typography>}
                         <Button color="primary" type="submit" fullWidth>SUBMIT</Button>
                     </form>
