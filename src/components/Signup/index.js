@@ -40,6 +40,11 @@ export default function Signup({onSubmit, error}) {
       const submit = event => {
         event.preventDefault()
         onSubmit({type: "signup",email, username, password, gender, age})
+        
+
+
+
+
       }
 
     return (
