@@ -8,6 +8,10 @@ import {
     Button,
     TextField,
     Typography,
+    FormLabel,
+    FormControlLabel,
+    RadioGroup,
+    Radio
   } from "@material-ui/core";
 
 const useStyles = makeStyles((theme)=>({
@@ -67,6 +71,7 @@ export default function Signup({onSubmit, error}) {
                 </Typography>
                 <CardContent>
                     <form className={classes.inputForm} onSubmit={submit}>
+                    <FormLabel component="legend">Email</FormLabel>
                     <TextField 
                         value={email} 
                         className={classes.input} 
@@ -75,6 +80,7 @@ export default function Signup({onSubmit, error}) {
                         fullWidth
                         onChange={e => setEmail(e.target.value)}>
                         </TextField>
+                        <FormLabel component="legend">Username</FormLabel>
                         <TextField 
                         value={username} 
                         className={classes.input} 
@@ -83,6 +89,7 @@ export default function Signup({onSubmit, error}) {
                         fullWidth
                         onChange={e => setUsername(e.target.value)}>
                         </TextField>
+                        <FormLabel component="legend">Password</FormLabel>
                         <TextField 
                         value={password} 
                         className={classes.input} 
@@ -92,15 +99,12 @@ export default function Signup({onSubmit, error}) {
                         type="password"
                         onChange={e => setPassword(e.target.value)}>
                         </TextField>
-                        <TextField 
-                        value={gender} 
-                        className={classes.input} 
-                        label="gender" 
-                        variant="outlined"
-                        fullWidth
-                        type="Gender"
-                        onChange={e => setGender(e.target.value)}>
-                        </TextField>
+                        <FormLabel component="legend">Gender</FormLabel>
+                        <RadioGroup aria-label="gender" name="gender1" value={gender} onChange={e => setGender(e.target.value)}>
+                          <FormControlLabel value="female" control={<Radio />} label="Female" />
+                          <FormControlLabel value="male" control={<Radio />} label="Male" />
+                        </RadioGroup>
+                        <FormLabel component="legend">Age</FormLabel>
                         <TextField 
                         value={age} 
                         className={classes.input} 
