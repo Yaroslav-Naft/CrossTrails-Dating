@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { makeStyles } from "@material-ui/core/styles";
+import { Auth } from 'aws-amplify';
+import { useHistory } from 'react-router-dom';
 import {
     Card,
     CardContent,
@@ -37,13 +39,22 @@ export default function Signup({onSubmit, error}) {
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
     
-      const submit = event => {
+      const submit = async event => {
         event.preventDefault()
         onSubmit({type: "signup",email, username, password, gender, age})
-        
 
-
-
+        try {
+          const signUp = await Auth.signUp({
+            username,
+            password,
+            attributes: {
+              email: email
+            }
+          })
+          console.log("You have sucessfully signed up")
+        } catch(error) {
+          console.log(`You have the following error: ${error}`)
+        }
 
       }
 
