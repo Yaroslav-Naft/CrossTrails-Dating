@@ -43,7 +43,7 @@ export default function Signup({onSubmit, error}) {
         event.preventDefault()
         onSubmit({type: "signup",email, username, password, gender, age})
         try {
-          const signUpResponse = await Auth.signUp({
+          const signedIn = await Auth.signUp({
             username,
             password,
             attributes: {

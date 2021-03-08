@@ -39,7 +39,7 @@ export default function Login({onSubmit, error}) {
       const submit = async event => {
         event.preventDefault()
         try {
-          const user = await Auth.signIn({
+          const loggedIn = await Auth.signIn({
             username,
             password
           })
