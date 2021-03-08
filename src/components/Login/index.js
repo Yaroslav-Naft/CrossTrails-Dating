@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
@@ -70,7 +69,7 @@ export default function Login({onSubmit, error}) {
                         <Button color="primary" type="submit" fullWidth>Login</Button>
                     </form>
                     <Typography  color="black" gutterBottom>
-                       Don't have an account? <Link>Sign up</Link>
+                       Don't have an account? <a href="#" >Sign up</a>
                     </Typography>
                 </CardContent>
             </Card>
