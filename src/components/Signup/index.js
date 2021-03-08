@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme)=>({
 
 export default function Signup({onSubmit, error}) {
     const classes = useStyles();
-
+    const history = useHistory();
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -50,6 +50,7 @@ export default function Signup({onSubmit, error}) {
               email: email
             }
           })
+
           console.log("You have sucessfully signed up")
         } catch(error) {
           console.log(`You have the following error:`)
