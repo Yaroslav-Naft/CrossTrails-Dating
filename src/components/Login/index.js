@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
@@ -83,7 +84,7 @@ export default function Login({onSubmit, error}) {
                         <Button color="primary" type="submit" fullWidth>Login</Button>
                     </form>
                     <Typography  color="black" gutterBottom>
-                       Don't have an account? <a href="#" >Sign up</a>
+                       Don't have an account? <Link to="/signup">Sign up</Link>
                     </Typography>
                 </CardContent>
             </Card>
