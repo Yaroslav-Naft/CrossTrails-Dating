@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme)=>({
 
 export default function Signup({onSubmit, error}) {
     const classes = useStyles();
-
+    const history = useHistory();
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -55,7 +55,7 @@ export default function Signup({onSubmit, error}) {
         event.preventDefault()
         onSubmit({type: "signup",email, username, password, gender, age})
         try {
-          const signUpResponse = await Auth.signUp({
+          const signedIn = await Auth.signUp({
             username,
             password,
             attributes: {
@@ -64,7 +64,8 @@ export default function Signup({onSubmit, error}) {
           })
           console.log("You have sucessfully signed up")
         } catch(error) {
-          console.log(`You have the following error: ${error}`)
+          console.log(`You have the following error:`)
+          console.log(error)
         }
 
       }
