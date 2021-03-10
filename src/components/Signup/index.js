@@ -18,7 +18,8 @@ import {
 
 const useStyles = makeStyles((theme)=>({
     root:{
-        maxWidth: "400px",
+        maxWidth: "500px",
+        maxHeight: "800px",
         padding: 20,
     },
     input: {

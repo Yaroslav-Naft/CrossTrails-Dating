@@ -2,6 +2,8 @@
 import Login from "./components/Login"
 import Signup from "./components/Signup/index"
 
+import './app.css'
+
 function App() {
   return (
     <div className="App">
