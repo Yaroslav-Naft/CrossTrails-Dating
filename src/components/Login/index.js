@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
@@ -14,6 +15,7 @@ import {
 const useStyles = makeStyles((theme)=>({
     root:{
         maxWidth: "400px",
+        maxHeight: "464px",
         padding: "48px 40px",
     },
     input: {
@@ -39,13 +41,14 @@ export default function Login({onSubmit, error}) {
       const submit = async event => {
         event.preventDefault()
         try {
-          const user = await Auth.signIn({
+          const loggedIn = await Auth.signIn({
             username,
             password
           })
           console.log("You have sucessfully logged In") 
         } catch (error) {
-          console.log(`You have the following error: ${error}`)
+          console.log(`You have the following error:`)
+          console.log(error)
         }
 
         onSubmit({type: "login", username, password})
@@ -79,10 +82,10 @@ export default function Login({onSubmit, error}) {
                         onChange={e => setPassword(e.target.value)}>
                         </TextField>
                         {!!error && <Typography>{error}</Typography>}
-                        <Button color="primary" type="submit" fullWidth>Login</Button>
+                        <Button color="primary" type="submit" fullWidth>LOGIN</Button>
                     </form>
                     <Typography  color="black" gutterBottom>
-                       Don't have an account? <a href="#" >Sign up</a> here
+                       Don't have an account? <Link to="/signup">Sign up</Link>
                     </Typography>
                 </CardContent>
             </Card>

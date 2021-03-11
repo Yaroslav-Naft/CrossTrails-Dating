@@ -1,4 +1,5 @@
 // Components
+<<<<<<< HEAD
 import Login from "./components/Login"
 import Signup from "./components/Signup/index"
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
@@ -47,6 +48,35 @@ function App() {
         </Switch>
       </Router>
     </div>
+=======
+import LoginPage from "./components/LoginPage/index"
+import SignupPage from "./components/SignupPage/index"
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
+import './app.css'
+
+function App() {
+  return (
+    <Router>
+      <span>
+        <ul>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/signup">Sign up</Link></li>
+        </ul>
+      </span>
+      <Switch>
+          <Route exact path="/signup">
+            <SignupPage onSubmit={(data) => console.log("submit signup", data)}/>
+          </Route>
+          <Route exact path="/login">
+            <LoginPage onSubmit={(data) => console.log("submit login", data)}/>
+          </Route>
+        <Route path="/">
+          <LoginPage onSubmit={(data) => console.log("submit login", data)}/>
+          </Route>
+      </Switch>
+    </Router>
+>>>>>>> 8ea8e45d1f8134983398a7f054406c5af0ca573f
   );
 }
 const Home  = () => <h1>Home</h1>;
