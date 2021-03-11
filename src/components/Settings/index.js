@@ -1,21 +1,48 @@
 import React, {useState, useEffect} from "react";
+import { useHistory } from "react-router";
 
 
 export default function Settings() {
 
-const url = "https://o6wwobyn4k.execute-api.us-west-1.amazonaws.com/prod"
-const [hikerData, sethikerData] = useState([])
+const history = useHistory()
+const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
+const [hiker, setHiker] = useState([])
+
 
 
 const displaySettings = async event => {
-    fetch(url + '/hikers')
+    fetch(`${url}/hikers/${hikersId}`)
     .then(response => response.json())
     .then(data => {
-        sethikerData(JSON.parse(data.body))
+        setHiker(JSON.parse(data.body))
     })
-
-
 }
+
+const submit = s => {
+    s.preventDefault()
+    //Update product
+    fetch(url + '/hikers', {
+        method: 'PUT',
+        body: JSON.stringify({ hiker }),
+        headers: { 'Content-Type': 'application/json'}
+    })
+    //update body
+    .then(response => response.json())
+    .then(() => { displaySettings () } )
+    history.push("/")
+}
+
+// const deleteItem = s => {
+//     s.preventDefault()
+//     //pass product
+//     fetch(API_INVOKE_URL + `/products/${productId}`, {
+//         method: 'DELETE',
+//         body: JSON.stringify({ product }),
+//         headers: { 'Content-Type': 'application/json'}
+//     })
+//     history.push("/")
+// }
+
 
 useEffect(() => {
     displaySettings()
@@ -23,7 +50,7 @@ useEffect(() => {
 
     return (
 <div>
-  <h2>Hikers</h2>
+  {/* <h2>Hikers</h2>
   <table>
       <thead>
           <tr>
@@ -33,7 +60,7 @@ useEffect(() => {
             </tr>
         </thead>
         <tbody>
-            {hikerData.map(hiker =>
+            {hiker.map(hiker =>
             <tr key={hiker.hikersId}>
                 <td>{hiker.hikersId}</td>
                 <td>{hiker.age}</td>
@@ -41,7 +68,39 @@ useEffect(() => {
             </tr>
             )}
         </tbody>
-    </table>
+    </table> */}
+
+    <form onSubmit={submit}>   
+        <h4>Update Hiker</h4>
+        <div className="control">
+            <label>Hiker Name: </label>
+            <input type="text" className="input" id="productName"
+            name="hiker[firstName]" value={hiker.firstName} onChange={e => setHiker({ ...hiker, firstName: e.target.value })}/>
+        </div>
+        {/* <div className="control">
+            <label>Age: </label>
+            <input type="text" className="input" id="productPrice"
+            name="hiker[age]" value={product.productPrice} onChange={e => setProduct({ ...product, productPrice: e.target.value })}/>
+        </div>
+        <div className="control">
+            <input type="submit" name="update" className="button is-black"/>
+        </div> */}
+        {/* <br></br>
+        <h4>Delete Product</h4>
+        <div className="control">
+            <span></span>
+            <button className="button" onClick={deleteItem}>Delete Product</button>
+        </div> */}
+</form>
+
+
+
+
+
+
+
+
+
 </div>
 
         

@@ -17,7 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/signup"><Signup onSubmit={(data) => console.log("submit signup", data)}/></Route>
         <Route exact path="/login"><Login onSubmit={(data) => console.log("submit login", data)}/></Route>
-        <Route exact path="/settings"><Settings /></Route>
+        <Route exact path="/settings/:hikersId"><Settings /></Route>
         <Route path="/"><Login onSubmit={(data) => console.log("submit login", data)}/></Route>
       </Switch>
     </Router>

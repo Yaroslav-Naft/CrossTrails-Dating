@@ -43,7 +43,7 @@ export default function Login({onSubmit, error}) {
           const loggedIn = await Auth.signIn({
             username,
             password
-          })
+          }) 
           console.log("You have sucessfully logged In") 
         } catch (error) {
           console.log(`You have the following error:`)
