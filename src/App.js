@@ -3,6 +3,7 @@ import LoginPage from "./components/LoginPage/index"
 import SignupPage from "./components/SignupPage/index"
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import './app.css'
+
 function App() {
   return (
     <Router>
@@ -10,6 +11,7 @@ function App() {
         <ul>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/signup">Sign up</Link></li>
+          <li><Link to="/settings">Settings</Link></li>
         </ul>
       </span> */}
       <Switch>

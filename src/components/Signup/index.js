@@ -63,7 +63,7 @@ export default function Signup({onSubmit, error}) {
             username,
             password,
             attributes: {
-              email: email
+              email: email,
             }
           })
           console.log("You have sucessfully signed up")
