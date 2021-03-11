@@ -18,7 +18,7 @@ import {
 
 const useStyles = makeStyles((theme)=>({
     root:{
-        maxWidth: "500px",
+        width: "500px",
         maxHeight: "800px",
         padding: 20,
     },
@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme)=>({
     },
     title:{
         marginLeft: 20,
+    },
+    row: {
+      display: "flex",
     }
 }))
 
@@ -109,23 +112,25 @@ export default function Signup({onSubmit, error}) {
                         type="password"
                         onChange={e => setPassword(e.target.value)}>
                         </TextField>
-                        <FormLabel component="legend">Gender</FormLabel>
-                        <RadioGroup aria-label="gender" name="gender1" value={gender} onChange={e => setGender(e.target.value)}>
-                          <FormControlLabel value="female" control={<Radio />} label="Female" />
-                          <FormControlLabel value="male" control={<Radio />} label="Male" />
-                        </RadioGroup>
-                        <FormLabel component="legend">Age</FormLabel>
-                        <Select
-                          labelId="demo-simple-select-outlined-label"
-                          id="demo-simple-select-outlined"
-                          value={age}
-                          onChange={e => setAge(e.target.value)}
-                          label="Age"
-                        >
-                          {ageOptions.map((a) => {
-                            return (<MenuItem value={a}>{a}</MenuItem>)
-                          })}
-                        </Select>
+                        <div>
+                          <FormLabel component="legend">Gender</FormLabel>
+                          <RadioGroup aria-label="gender" name="gender1" value={gender} onChange={e => setGender(e.target.value)}>
+                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                            <FormControlLabel value="male" control={<Radio />} label="Male" />
+                          </RadioGroup>
+                          <FormLabel component="legend">Age</FormLabel>
+                          <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            value={age}
+                            onChange={e => setAge(e.target.value)}
+                            label="Age"
+                          >
+                            {ageOptions.map((a) => {
+                              return (<MenuItem value={a}>{a}</MenuItem>)
+                            })}
+                          </Select>
+                        </div>
                         {!!error && <Typography>{error}</Typography>}
                         <Button color="primary" type="submit" fullWidth>SUBMIT</Button>
                     </form>
