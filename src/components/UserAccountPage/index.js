@@ -38,7 +38,7 @@ export default function UserAccountPage() {
     const classes = useStyles();
 
     const [editing, setEditing] = useState(false)
-    const [hikes, setHikes] = useState(["GARIBALDI LAKE TRAIL", "MOUNT CHEAM", "JOFFRE LAKES TRAIL"])
+    const [hikes, setHikes] = useState(["asdfsafs","sadfasf","asdfasf"])
 
     const submit = (e) => {
         e.preventDefault()
@@ -81,34 +81,24 @@ export default function UserAccountPage() {
                 {editing == true ?  (
                      <form className={classes.root} noValidate autoComplete="off" onSubmit={submit}>
                          <List>
-                            <ListItem>
-                                <Input placeholder={hikes[0]} inputProps={{ 'aria-label': 'favourite hike 1' }} />
-                            </ListItem>
-                            <ListItem>
-                                <Input placeholder={hikes[1]} inputProps={{ 'aria-label': 'favourite hike 2' }} />
-                            </ListItem>
-                            <ListItem>
-                                <Input placeholder={hikes[2]} inputProps={{ 'aria-label': 'favourite hike 3' }} />
-                            </ListItem>
+                             {hikes.map((hike)=>{
+                                <ListItem>
+                                    <Input placeholder={hike} inputProps={{ 'aria-label': 'favourite hike 1' }} onChange={setHikes(e => e.target.value)}/>
+                                </ListItem>
+                             })}
                          </List>
                          
                      </form>
                  ) : 
                     (<List>
                         <ListItem>
-                            <ListItemText>
-                                {hikes[0]}
-                            </ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>
-                                {hikes[1]}
-                            </ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>
-                                {hikes[2]}
-                            </ListItemText>
+                            {hikes.map((hike)=>(
+                                <ListItemText>
+                                    {hike}
+                                </ListItemText>
+                            )
+                            )}
+                            
                         </ListItem>
                     </List>
                     )}
