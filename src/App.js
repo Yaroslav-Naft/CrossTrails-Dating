@@ -58,12 +58,12 @@ import './app.css'
 function App() {
   return (
     <Router>
-      <span>
+      {/* <span>
         <ul>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/signup">Sign up</Link></li>
         </ul>
-      </span>
+      </span> */}
       <Switch>
           <Route exact path="/signup">
             <SignupPage onSubmit={(data) => console.log("submit signup", data)}/>

@@ -133,6 +133,7 @@ export default function Signup({onSubmit, error}) {
                         </div>
                         {!!error && <Typography>{error}</Typography>}
                         <Button color="primary" type="submit" fullWidth>SUBMIT</Button>
+                        
                     </form>
                 </CardContent>
             </Card>
