@@ -67,6 +67,8 @@ export default function Signup({onSubmit, error}) {
             }
           })
           console.log("You have sucessfully signed up")
+          alert("We have sent you a confirmation email!");
+          history.push("/login")
         } catch(error) {
           console.log(`You have the following error:`)
           console.log(error)
