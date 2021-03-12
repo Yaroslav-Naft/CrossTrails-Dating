@@ -33,6 +33,9 @@ const username = "yaronaftulyev"
           <Route exact path="/account">
             <UserAccountPage username={username}></UserAccountPage>
           </Route>
+          <Route path="/hikersDetails/:hikersId">
+          <UserAccountPage username={username}></UserAccountPage>
+          </Route>
         <Route path="/">
           <LoginPage onSubmit={(data) => console.log("submit login", data)}/>
           </Route>
