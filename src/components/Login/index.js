@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme)=>({
 
 export default function Login({onSubmit, error}) {
     const classes = useStyles();
-
+    const history = useHistory();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
@@ -46,6 +46,7 @@ export default function Login({onSubmit, error}) {
             password
           }) 
           console.log("You have sucessfully logged In") 
+          history.push("/account")
         } catch (error) {
           console.log(`You have the following error:`)
           console.log(error)

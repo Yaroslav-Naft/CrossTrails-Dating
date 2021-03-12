@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import EditIcon from '@material-ui/icons/Edit';
@@ -34,20 +35,56 @@ const useStyles = makeStyles((theme)=>({
       }
 }))
 
-export default function UserAccountPage() {
-    const classes = useStyles();
+export default function UserAccountPage({ username }) {
 
+    const classes = useStyles();
     const [editing, setEditing] = useState(false)
     const [hikes, setHikes] = useState(["asdfsafs","sadfasf","asdfasf"])
+    const history = useHistory()
+    const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
+    const [hiker, setHiker] = useState([])
+    const hikersId = "1"
 
-    const submit = (e) => {
-        e.preventDefault()
-    }
+
+    // const submit = (e) => {
+    //     e.preventDefault()
+    // }
+    
+    const displaySettings = async event => {
+    fetch(`${url}/hikers/${hikersId}`)
+    .then(response => response.json())
+    .then(data => {
+        setHiker(JSON.parse(data.body))
+    })
+    }   
+
+    useEffect(() => {
+        displaySettings()
+    }, [])
 
 
     return (
-        
-              <Card className={classes.root}>
+            <div> 
+                
+            <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Age</th>
+                    <th>Favourite Hikes</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {hiker.map(hiker =>
+                  <tr key={hiker.hikersId}>
+                      <td>{hiker.hikersId}</td>
+                      <td>{hiker.age}</td>
+                      <td>{hiker.favouritesHikes}</td>
+                  </tr>
+                  )}
+              </tbody>
+          </table>
+              {/* <Card className={classes.root}>
                 <CardActionArea>
                     <CardContent>
                     <IconButton aria-label="add photo">
@@ -111,7 +148,11 @@ export default function UserAccountPage() {
                         across all continents except Antarctica
                     </Typography>
                 </CardActions>
-                </Card>
+                </Card> */}
+
+
+
+    </div>
       
     )
 }
