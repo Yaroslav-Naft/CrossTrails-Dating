@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
+import EditProfile from './EditProfile'
 import { makeStyles } from "@material-ui/core/styles";
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import EditIcon from '@material-ui/icons/Edit';
-import CheckIcon from '@material-ui/icons/Check';
 import {
     Card,
     CardContent,
@@ -26,92 +26,91 @@ const useStyles = makeStyles((theme)=>({
       column: {
           display: "flex",
           alignItems: "start",
-          flexDirection: "column"
+          flexDirection: "column",
+          width: "50%"
       },
       row: {
           display: "flex",
-          flexDirection: "row"
+          flexDirection: "row",
+      },
+      leftContainer:{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "50%"
       }
+      
 }))
 
-export default function UserAccountPage() {
+export default function UserAccountPage({onSubmit}) {
     const classes = useStyles();
 
-    const [editing, setEditing] = useState(false)
-    const [hikes, setHikes] = useState(["asdfsafs","sadfasf","asdfasf"])
+    const [editMode, setEditMode] = useState(false)
+    const [firstName, setFirstName] = useState("John")
+    const [lastName, setLastName] = useState("Doe")
+    const [age, setAge] = useState(25)
+    const [location, setLocation] = useState("Vancouver, BC")
+    const [bio, setBio] = useState("Hello World!")
+    const [favouriteHikes, setFavouriteHikes] = useState([])
 
-    const submit = (e) => {
-        e.preventDefault()
+    const handleEditChange = () => {
+        setEditMode(false)
     }
-
-
+   
     return (
-        
-              <Card className={classes.root}>
-                <CardActionArea>
-                    <CardContent>
+        <Card className={classes.root}>
+            <CardActionArea>
+                <CardContent className={classes.leftContainer}>
                     <IconButton aria-label="add photo">
                         <AddAPhotoIcon />
                     </IconButton>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions className={classes.column}>
-                <Typography gutterBottom variant="h4" component="h2">
-                        John Doe
-                </Typography>
+                </CardContent>
+            </CardActionArea>
+            {editMode ? (
+                <EditProfile onSubmit={(data) => console.log("submit info", data)} handleEditChange={handleEditChange}/>
+            )
+            : (
+            <CardActions className={classes.column}>
                 <div className={classes.row}>
-                <Typography gutterBottom variant="h6" component="h2">
-                        Age 25
-                </Typography>
-                <Typography  variant="subtitle1" component="subtitle1">
-                        Vancouver, BC
-                </Typography>
-                </div>
-                <div>
-                    <Typography variant="subtitle1" component="subtitle1">
-                            Favourite Hikes
+                    <Typography gutterBottom variant="h4" component="h2">
+                        {firstName} {lastName}
                     </Typography>
-                    <IconButton aria-label="editing" onClick={e => setEditing(true)}>
+                    <IconButton aria-label="editing" z>
                         <EditIcon />
                     </IconButton>
-                    <IconButton aria-label="check mark" onClick={e => setEditing(false)}>
-                            <CheckIcon />
-                    </IconButton>
                 </div>
-                {editing == true ?  (
-                     <form className={classes.root} noValidate autoComplete="off" onSubmit={submit}>
-                         <List>
-                             {hikes.map((hike)=>{
-                                <ListItem>
-                                    <Input placeholder={hike} inputProps={{ 'aria-label': 'favourite hike 1' }} onChange={setHikes(e => e.target.value)}/>
-                                </ListItem>
-                             })}
-                         </List>
-                         
-                     </form>
-                 ) : 
-                    (<List>
+                    <Typography gutterBottom variant="h6" component="h2">
+                        Age {age} {location}
+                    </Typography>
+
+                    <Typography variant="subtitle1" component="subtitle1">
+                        Favourite Hikes
+                    </Typography>
+                    <List className={classes.column}>
                         <ListItem>
-                            {hikes.map((hike)=>(
-                                <ListItemText>
-                                    {hike}
-                                </ListItemText>
-                            )
-                            )}
-                            
+                            <ListItemText>
+                                {favouriteHikes}
+                            </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>
+                                {favouriteHikes}
+                            </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>
+                                {favouriteHikes}
+                            </ListItemText>
                         </ListItem>
                     </List>
-                    )}
-                
-                    <Typography gutterBottom variant="subtitle1" component="subtitle1">
-                            Bio
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-                    </Typography>
-                </CardActions>
-                </Card>
-      
+                <Typography gutterBottom variant="h6" component="h2">
+                    Bio
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                     {bio}
+                </Typography>
+            </CardActions>
+            )}
+        </Card>
     )
 }
