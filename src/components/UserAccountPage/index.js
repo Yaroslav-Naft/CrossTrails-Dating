@@ -56,6 +56,21 @@ export default function UserAccountPage() {
     // const submit = (e) => {
     //     e.preventDefault()
     // }
+
+
+    const submit = s => {
+        s.preventDefault()
+        //Update product
+        fetch( url + '/hikers', {
+            method: 'PUT',
+            body: JSON.stringify({ hiker }),
+            headers: { 'Content-Type': 'application/json'}
+        })
+        //update body
+        .then(response => response.json())
+        .then(() => { displaySettings ()} )
+    }
+
     
     const displaySettings = async () => {
     fetch(`${url}/hikers/${state.username}`)
@@ -89,15 +104,13 @@ export default function UserAccountPage() {
         ? (<p>Loading</p>) : (
 
         <div>
-                <form >   
+                <form onSubmit={submit} >   
 
                 <h4>Update Hiker</h4>
                 <div>{hiker[0].hikersId}</div>
 
 
                 {/* Only works when uncommenting after initial load */}
-
-
 
                 <div className="control">
                     <label>Username: </label>
@@ -110,14 +123,13 @@ export default function UserAccountPage() {
                     name="hiker[age]" value={hiker[0].age} onChange={e => setHiker({ ...hiker, age: e.target.value })}/>
                 </div>
 
-
                 {/* <div className="control">
                     <label>Product Price: </label>
                     <input type="text" className="input" id="productPrice"
                     name="product[productName]" value={product.productPrice} onChange={e => setProduct({ ...product, productPrice: e.target.value })}/>
                 </div> */}
                 <div className="control">
-                    <input  name="update" className="button is-black"/>
+                    <input type="submit" name="update" className="button is-black"/>
                 </div>
                 {/* <br></br>
                 <h4>Delete Product</h4>
