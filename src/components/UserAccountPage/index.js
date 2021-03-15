@@ -47,6 +47,7 @@ export default function UserAccountPage() {
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
     const [hikers, setHikers] = useState([])
     const [hiker, setHiker] = useState({})
+    const [loading, setLoading] = useState(1)
     
 
     //console.log(state.username)
@@ -61,6 +62,7 @@ export default function UserAccountPage() {
     .then(response => response.json())
     .then(data => {
         setHiker(data)
+        setLoading(0)
     })
     
     }   
@@ -74,61 +76,63 @@ export default function UserAccountPage() {
 
     useEffect(() => {
     //    searchProduct()
-        displaySettings()
+            displaySettings()
+        //setLoading(0)
     }, [])
 
     console.log({hiker})
 
 
     return (
-        
-        
-           <form >   
+        <div>
+        {loading === 1
+        ? (<p>Loading</p>) : (
 
-            <h4>Update Hiker</h4>
-            <div>{hiker[0].hikersId}</div>
+        <div>
+                <form >   
 
-
-            {/* Only works when uncommenting after initial load */}
-
-
-
-            {/* <div className="control">
-                <label>Username: </label>
-                <input type="text" className="input" id="userName"
-                name="hiker[userName]" value={hiker[0].userName} onChange={e => setHiker({ ...hiker, userName: e.target.value })}/>
-            </div> */}
-            {/* <div className="control">
-                <label>Age: </label>
-                <input type="text" className="input" id="age"
-                name="hiker[age]" value={hiker[0].age} onChange={e => setHiker({ ...hiker, age: e.target.value })}/>
-            </div> */}
+                <h4>Update Hiker</h4>
+                <div>{hiker[0].hikersId}</div>
 
 
-            {/* <div className="control">
-                <label>Product Price: </label>
-                <input type="text" className="input" id="productPrice"
-                name="product[productName]" value={product.productPrice} onChange={e => setProduct({ ...product, productPrice: e.target.value })}/>
-            </div> */}
-            <div className="control">
-                <input  name="update" className="button is-black"/>
-            </div>
-            {/* <br></br>
-            <h4>Delete Product</h4>
-            <div className="control">
-                <span></span>
-                <button className="button" onClick={deleteItem}>Delete Product</button>
-            </div> */}
-
-    </form>
+                {/* Only works when uncommenting after initial load */}
 
 
 
+                <div className="control">
+                    <label>Username: </label>
+                    <input type="text" className="input" id="userName"
+                    name="hiker[userName]" value={hiker[0].userName} onChange={e => setHiker({ ...hiker, userName: e.target.value })}/>
+                </div> 
+                 <div className="control">
+                    <label>Age: </label>
+                    <input type="text" className="input" id="age"
+                    name="hiker[age]" value={hiker[0].age} onChange={e => setHiker({ ...hiker, age: e.target.value })}/>
+                </div>
 
-        
+
+                {/* <div className="control">
+                    <label>Product Price: </label>
+                    <input type="text" className="input" id="productPrice"
+                    name="product[productName]" value={product.productPrice} onChange={e => setProduct({ ...product, productPrice: e.target.value })}/>
+                </div> */}
+                <div className="control">
+                    <input  name="update" className="button is-black"/>
+                </div>
+                {/* <br></br>
+                <h4>Delete Product</h4>
+                <div className="control">
+                    <span></span>
+                    <button className="button" onClick={deleteItem}>Delete Product</button>
+                </div> */}
+
+                </form>
+        </div>
 
     )
+}
 
+    </div>)
 
 
 
