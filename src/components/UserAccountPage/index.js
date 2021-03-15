@@ -47,82 +47,87 @@ export default function UserAccountPage() {
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
     const [hikers, setHikers] = useState([])
     const [hiker, setHiker] = useState({})
-
-
-    //get data from previous page
-    let { hikersId } = useParams()
-    // console.log(hikersId)
     
 
-
-    //useNavigate
-
-    // const username = state.username
-
-    //const {username} = state.username
-    console.log(state.username)
-    // console.log(username)
-    // console.log(state.username)
-    let username = state.username
     //console.log(state.username)
-    //console.log(`The params are: ${username}`)
+    let username = state.username
 
     // const submit = (e) => {
     //     e.preventDefault()
     // }
     
-    const displaySettings = async event => {
+    const displaySettings = async () => {
     fetch(`${url}/hikers/${state.username}`)
     .then(response => response.json())
     .then(data => {
         setHiker(data)
     })
-    //console.log(hiker)
+    
     }   
-
-    // useEffect(() => {
-    //     displaySettings()
-    // }, [])
-
-
-    const searchProduct = async () => {
-        fetch(url + '/hikers')
-        .then(response => response.json())
-        .then(data => setHikers(
-            JSON.parse(data.body)
-        ))
-    }
+    // const searchProduct = async () => {
+    //     fetch(url + '/hikers')
+    //     .then(response => response.json())
+    //     .then(data => setHikers(
+    //         JSON.parse(data.body)
+    //     ))
+    // }
 
     useEffect(() => {
     //    searchProduct()
         displaySettings()
     }, [])
 
+    console.log({hiker})
+
 
     return (
- <div>
-        <form >   
-                <h4>Update Product</h4>
-                <div className="control">
-                    <label>Product Name: </label>
-                    <input type="text" className="input" id="hikers"
-                    name="hiker[hikersId]" value={hiker.hikersId} />
-                </div>
+        
+        
+           <form >   
+
+            <h4>Update Hiker</h4>
+            <div>{hiker[0].hikersId}</div>
 
 
-        </form>
+            {/* Only works when uncommenting after initial load */}
 
 
-        </div>
+
+            {/* <div className="control">
+                <label>Username: </label>
+                <input type="text" className="input" id="userName"
+                name="hiker[userName]" value={hiker[0].userName} onChange={e => setHiker({ ...hiker, userName: e.target.value })}/>
+            </div> */}
+            {/* <div className="control">
+                <label>Age: </label>
+                <input type="text" className="input" id="age"
+                name="hiker[age]" value={hiker[0].age} onChange={e => setHiker({ ...hiker, age: e.target.value })}/>
+            </div> */}
+
+
+            {/* <div className="control">
+                <label>Product Price: </label>
+                <input type="text" className="input" id="productPrice"
+                name="product[productName]" value={product.productPrice} onChange={e => setProduct({ ...product, productPrice: e.target.value })}/>
+            </div> */}
+            <div className="control">
+                <input  name="update" className="button is-black"/>
+            </div>
+            {/* <br></br>
+            <h4>Delete Product</h4>
+            <div className="control">
+                <span></span>
+                <button className="button" onClick={deleteItem}>Delete Product</button>
+            </div> */}
+
+    </form>
+
 
 
 
         
 
     )
-
-
-
 
 
 
