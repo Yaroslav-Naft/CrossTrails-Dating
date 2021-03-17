@@ -42,19 +42,19 @@ const useStyles = makeStyles((theme)=>({
       
 }))
 
-export default function UserAccountPage({onSubmit}) {
+export default function UserAccountPage({onSubmit, data}) {
     const classes = useStyles();
 
-    const [editMode, setEditMode] = useState(false)
-    const [firstName, setFirstName] = useState("John")
-    const [lastName, setLastName] = useState("Doe")
+    const [editMode, setEditMode] = useState(0)
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [age, setAge] = useState(25)
-    const [location, setLocation] = useState("Vancouver, BC")
+    const [location, setLocation] = useState("")
     const [bio, setBio] = useState("Hello World!")
     const [favouriteHikes, setFavouriteHikes] = useState([])
 
     const handleEditChange = () => {
-        setEditMode(false)
+        setEditMode(1)
     }
    
     return (
@@ -75,8 +75,8 @@ export default function UserAccountPage({onSubmit}) {
                     <Typography gutterBottom variant="h4" component="h2">
                         {firstName} {lastName}
                     </Typography>
-                    <IconButton aria-label="editing" z>
-                        <EditIcon />
+                    <IconButton aria-label="editing" >
+                        <EditIcon onClick={handleEditChange}/>
                     </IconButton>
                 </div>
                     <Typography gutterBottom variant="h6" component="h2">
@@ -109,6 +109,12 @@ export default function UserAccountPage({onSubmit}) {
                 <Typography variant="body2" color="textSecondary" component="p">
                      {bio}
                 </Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                    Highlights
+                </Typography>
+                <div>
+
+                </div>
             </CardActions>
             )}
         </Card>
