@@ -45,10 +45,13 @@ export default function UserAccountPage() {
     const history = useHistory()
     const {state} = useLocation()
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
-    const [hikers, setHikers] = useState([])
     const [hiker, setHiker] = useState({})
     const [loading, setLoading] = useState(1)
+    const [num, setNum] = useState(0)
+
+
     
+
 
     //console.log(state.username)
     let username = state.username
@@ -79,24 +82,29 @@ export default function UserAccountPage() {
         setHiker(data)
         setLoading(0)
     })
-    
+        console.log({hiker})
     }   
-    // const searchProduct = async () => {
-    //     fetch(url + '/hikers')
-    //     .then(response => response.json())
-    //     .then(data => setHikers(
-    //         JSON.parse(data.body)
-    //     ))
-    // }
+
+
+    
+const deleteItem = s => {
+    s.preventDefault()
+    //pass product
+    fetch(url + `/hikers/${state.username}`, {
+        method: 'DELETE',
+        body: JSON.stringify( { hiker } ),
+        headers: { 'Content-Type': 'application/json'}
+    })
+
+}
+
 
     useEffect(() => {
-    //    searchProduct()
             displaySettings()
-        //setLoading(0)
+            console.log({ hiker })
     }, [])
 
     console.log({hiker})
-
 
     return (
         <div>
@@ -114,8 +122,8 @@ export default function UserAccountPage() {
 
                 <div className="control">
                     <label>Username: </label>
-                    <input type="text" className="input" id="userName"
-                    name="hiker[userName]" value={hiker[0].userName} onChange={e => setHiker({ ...hiker, userName: e.target.value })}/>
+                    <input type="text" className="input"
+                     value={hiker[0].userName} onChange={e => setHiker({...hiker, userName: e.target.value } )}/>
                 </div> 
                  <div className="control">
                     <label>Age: </label>
@@ -131,12 +139,12 @@ export default function UserAccountPage() {
                 <div className="control">
                     <input type="submit" name="update" className="button is-black"/>
                 </div>
-                {/* <br></br>
-                <h4>Delete Product</h4>
+                <br></br>
+                <h4>Delete Student</h4>
                 <div className="control">
                     <span></span>
-                    <button className="button" onClick={deleteItem}>Delete Product</button>
-                </div> */}
+                    <button className="button" onClick={deleteItem}>Delete Student</button>
+                </div>
 
                 </form>
         </div>
