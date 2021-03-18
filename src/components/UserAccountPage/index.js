@@ -45,12 +45,10 @@ export default function UserAccountPage() {
     const history = useHistory()
     const {state} = useLocation()
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
-    const [hiker, setHiker] = useState({})
+    const [hiker, setHiker] = useState([])
     const [loading, setLoading] = useState(1)
     const [num, setNum] = useState(0)
-
-
-    
+    const [newHiker, setNewHiker] = useState({})
 
 
     //console.log(state.username)
@@ -64,14 +62,16 @@ export default function UserAccountPage() {
     const submit = s => {
         s.preventDefault()
         //Update product
-        fetch( url + '/hikers', {
+        
+        fetch( url + `/hikers/${state.username}`, {
             method: 'PUT',
-            body: JSON.stringify({ hiker }),
+            body: JSON.stringify({ newHiker }),
             headers: { 'Content-Type': 'application/json'}
         })
         //update body
         .then(response => response.json())
         .then(() => { displaySettings ()} )
+        console.log({newHiker})
     }
 
     
@@ -95,9 +95,8 @@ const deleteItem = s => {
         body: JSON.stringify( { hiker } ),
         headers: { 'Content-Type': 'application/json'}
     })
-
+    history.push("/")
 }
-
 
     useEffect(() => {
             displaySettings()
@@ -115,20 +114,31 @@ const deleteItem = s => {
                 <form onSubmit={submit} >   
 
                 <h4>Update Hiker</h4>
-                <div>{hiker[0].hikersId}</div>
+                {/* <div>{hiker[0].hikersId}</div> */}
 
 
                 {/* Only works when uncommenting after initial load */}
 
+            
+                {/* {hiker.map(newHiker =>(
+                    <div>{newHiker.hikersId}</div>
+                )) */}
+                
+
+
+
+                {hiker.map(hiker => (
+                <div>
                 <div className="control">
                     <label>Username: </label>
-                    <input type="text" className="input"
-                     value={hiker[0].userName} onChange={e => setHiker({...hiker, userName: e.target.value } )}/>
+                    <input type="text" className="input" id="userName"
+                    name="hiker[userName]"
+                    value={newHiker.userName} onChange={e => setNewHiker({...hiker, userName: e.target.value } )}/>
                 </div> 
                  <div className="control">
                     <label>Age: </label>
                     <input type="text" className="input" id="age"
-                    name="hiker[age]" value={hiker[0].age} onChange={e => setHiker({ ...hiker, age: e.target.value })}/>
+                    name="hiker[age]" value={newHiker.age} onChange={e => setNewHiker({ ...newHiker, age: e.target.value })}/>
                 </div>
 
                 {/* <div className="control">
@@ -145,6 +155,9 @@ const deleteItem = s => {
                     <span></span>
                     <button className="button" onClick={deleteItem}>Delete Student</button>
                 </div>
+            </div>
+                ))
+            }
 
                 </form>
         </div>
