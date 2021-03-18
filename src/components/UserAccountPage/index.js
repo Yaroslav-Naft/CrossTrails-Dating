@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react'
 import { useHistory, useParams } from "react-router";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+
+import EditProfile from './EditProfile'
 import { makeStyles } from "@material-ui/core/styles";
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import EditIcon from '@material-ui/icons/Edit';
-import CheckIcon from '@material-ui/icons/Check';
 import {
     Card,
     CardContent,
@@ -29,12 +30,20 @@ const useStyles = makeStyles((theme)=>({
       column: {
           display: "flex",
           alignItems: "start",
-          flexDirection: "column"
+          flexDirection: "column",
+          width: "50%"
       },
       row: {
           display: "flex",
-          flexDirection: "row"
+          flexDirection: "row",
+      },
+      leftContainer:{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "50%"
       }
+      
 }))
 
 export default function UserAccountPage() {
@@ -53,25 +62,6 @@ export default function UserAccountPage() {
 
     //console.log(state.username)
     let username = state.username
-
-    // const submit = (e) => {
-    //     e.preventDefault()
-    // }
-
-    // const submit = s => {
-    //     s.preventDefault()
-    //     //Update product
-    //     fetch(API_INVOKE_URL + '/products', {
-    //         method: 'PUT',
-    //         body: JSON.stringify({ product }),
-    //         headers: { 'Content-Type': 'application/json'}
-    //     })
-    //     //update body
-    //     .then(response => response.json())
-    //     .then(() => { getProduct ()} )
-    //     history.push("/")
-    // }
-
 
     const submit = s => {
         s.preventDefault()
@@ -128,15 +118,7 @@ const deleteItem = s => {
                 <form onSubmit={submit} >   
 
                 <h4>Update Hiker</h4>
-                {/* <div>{hiker[0].hikersId}</div> */}
-
-
                 {/* Only works when uncommenting after initial load */}
-
-            
-                {/* {hiker.map(newHiker =>(
-                    <div>{newHiker.hikersId}</div>
-                )) */}
                 
                 {hiker.map(hiker => (
                 <div>
@@ -169,164 +151,11 @@ const deleteItem = s => {
                 ))
             }
 
-                </form>
-                
-               <Card className={classes.root}>
-                <CardActionArea>
-                    <CardContent>
-                    <IconButton aria-label="add photo">
-                        <AddAPhotoIcon />
-                    </IconButton>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions className={classes.column}>
-                <Typography gutterBottom variant="h4" component="h2">
-                        John Doe
-                </Typography>
-                <div className={classes.row}>
-                <Typography gutterBottom variant="h6" component="h2">
-                        Age 25
-                </Typography>
-                <Typography  variant="subtitle1" component="subtitle1">
-                        Vancouver, BC
-                </Typography>
-                </div>
-                <div>
-                    <Typography variant="subtitle1" component="subtitle1">
-                            Favourite Hikes
-                    </Typography>
-                    <IconButton aria-label="editing" onClick={e => setEditing(true)}>
-                        <EditIcon />
-                    </IconButton>
-                    <IconButton aria-label="check mark" onClick={e => setEditing(false)}>
-                            <CheckIcon />
-                    </IconButton>
-                </div>
-                {editing == true ?  (
-                     <form className={classes.root} noValidate autoComplete="off" onSubmit={submit}>
-                         <List>
-                             {hikes.map((hike)=>{
-                                <ListItem>
-                                    <Input placeholder={hike} inputProps={{ 'aria-label': 'favourite hike 1' }} onChange={setHikes(e => e.target.value)}/>
-                                </ListItem>
-                             })}
-                         </List>
-                         
-                     </form>
-                 ) : 
-                    (<List>
-                        <ListItem>
-                            {hikes.map((hike)=>(
-                                <ListItemText>
-                                    {hike}
-                                </ListItemText>
-                            )
-                            )}
-                            
-                        </ListItem>
-                    </List>
-                    )}
-                
-                    <Typography gutterBottom variant="subtitle1" component="subtitle1">
-                            Bio
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-                    </Typography>
-                </CardActions>
-                </Card>       
+                </form>       
         </div>
 
     )
 }
 
     </div>)
-
-        //     <div> 
-                
-        //     <table>
-        //     <thead>
-        //         <tr>
-        //             <th>Id</th>
-        //             <th>Age</th>
-        //             <th>Favourite Hikes</th>
-        //           </tr>
-        //       </thead>
-        //       <tbody>
-        //           {hiker.hikersId}
-        //           {/* {hiker.map(hiker =>
-        //           <tr key={hiker.hikersId}>
-        //               <td>{hiker.hikersId}</td>
-        //               <td>{hiker.age}</td>
-        //               <td>{hiker.favouritesHikes}</td>
-        //           </tr>
-        //           )} */}
-        //       </tbody>
-        //   </table>
-              /* <Card className={classes.root}>
-                <CardActionArea>
-                    <CardContent>
-                    <IconButton aria-label="add photo">
-                        <AddAPhotoIcon />
-                    </IconButton>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions className={classes.column}>
-                <Typography gutterBottom variant="h4" component="h2">
-                        John Doe
-                </Typography>
-                <div className={classes.row}>
-                <Typography gutterBottom variant="h6" component="h2">
-                        Age 25
-                </Typography>
-                <Typography  variant="subtitle1" component="subtitle1">
-                        Vancouver, BC
-                </Typography>
-                </div>
-                <div>
-                    <Typography variant="subtitle1" component="subtitle1">
-                            Favourite Hikes
-                    </Typography>
-                    <IconButton aria-label="editing" onClick={e => setEditing(true)}>
-                        <EditIcon />
-                    </IconButton>
-                    <IconButton aria-label="check mark" onClick={e => setEditing(false)}>
-                            <CheckIcon />
-                    </IconButton>
-                </div>
-                {editing == true ?  (
-                     <form className={classes.root} noValidate autoComplete="off" onSubmit={submit}>
-                         <List>
-                             {hikes.map((hike)=>{
-                                <ListItem>
-                                    <Input placeholder={hike} inputProps={{ 'aria-label': 'favourite hike 1' }} onChange={setHikes(e => e.target.value)}/>
-                                </ListItem>
-                             })}
-                         </List>
-                         
-                     </form>
-                 ) : 
-                    (<List>
-                        <ListItem>
-                            {hikes.map((hike)=>(
-                                <ListItemText>
-                                    {hike}
-                                </ListItemText>
-                            )
-                            )}
-                            
-                        </ListItem>
-                    </List>
-                    )}
-                
-                    <Typography gutterBottom variant="subtitle1" component="subtitle1">
-                            Bio
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-                    </Typography>
-                </CardActions>
-                </Card> */
 }
