@@ -74,8 +74,6 @@ export default function Login({onSubmit, error}) {
     }, [])
 
     return (
-
-
       <div>
             <Card className={classes.root}>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -111,33 +109,6 @@ export default function Login({onSubmit, error}) {
                     </Typography>
                 </CardContent>
             </Card>
-
-<table>
-<thead>
-    <tr>
-        <th>Username</th>
-        <th>Age</th>
-        {/* <th>{hiker.age}</th> */}
-    </tr>
-</thead>
-<tbody>
-{hikers.map(hiker =>
-<tr key={hiker.hikersId}>
-    <td>{hiker.userName}</td>
-    <td>{hiker.age}</td>
-    <td><Link to={`hikersDetails/${hiker.hikersId}`}>{hiker.hikersId}</Link></td>
-    {/* <td>{product.productPrice}</td>
-    <td>Go to<Link to={`productDetails/${product.productId}`}> {product.productName}</Link></td> */}
-</tr>          
-)}
-</tbody>
-</table>
-
 </div>
-
-
-
-
-
     )
 }
