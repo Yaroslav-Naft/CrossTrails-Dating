@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme)=>({
       
 }))
 
-export default function UserAccountPage() {
+export default function UserAccountPage({username}) {
 
     const classes = useStyles();
     const [editing, setEditing] = useState(false)
@@ -58,10 +58,6 @@ export default function UserAccountPage() {
     const [loading, setLoading] = useState(1)
     const [num, setNum] = useState(0)
     const [newHiker, setNewHiker] = useState({})
-
-
-    //console.log(state.username)
-    let username = state.username
 
     const submit = s => {
         s.preventDefault()
