@@ -13,12 +13,13 @@ import {
     ListItem,
     ListItemText,
     IconButton,
-    Input
+    Input,
+    CardMedia
   } from "@material-ui/core";
 
 const useStyles = makeStyles((theme)=>({
     root: {
-        maxWidth: "1116px",
+        width: "1280px",
         height: "699px",
         backgroundColor: "#F8F8F8",
         display: "flex",
@@ -50,12 +51,14 @@ export default function UserAccountPage({onSubmit, data}) {
     const [lastName, setLastName] = useState("")
     const [age, setAge] = useState(25)
     const [location, setLocation] = useState("")
-    const [bio, setBio] = useState("Hello World!")
+    const [bio, setBio] = useState("")
     const [favouriteHikes, setFavouriteHikes] = useState([])
 
     const handleEditChange = () => {
         setEditMode(1)
     }
+
+
    
     return (
         <Card className={classes.root}>
@@ -66,11 +69,12 @@ export default function UserAccountPage({onSubmit, data}) {
                     </IconButton>
                 </CardContent>
             </CardActionArea>
+
             {editMode ? (
                 <EditProfile onSubmit={(data) => console.log("submit info", data)} handleEditChange={handleEditChange}/>
             )
             : (
-            <CardActions className={classes.column}>
+            <CardContent className={classes.column}>
                 <div className={classes.row}>
                     <Typography gutterBottom variant="h4" component="h2">
                         {firstName} {lastName}
@@ -113,9 +117,18 @@ export default function UserAccountPage({onSubmit, data}) {
                     Highlights
                 </Typography>
                 <div>
-
+                    <CardMedia
+                        className={classes.cover}
+                        image=""
+                        title="Highlight 1"
+                    />
+                    <CardMedia
+                        className={classes.cover}
+                        image=""
+                        title="Highlight 2"
+                    />
                 </div>
-            </CardActions>
+            </CardContent>
             )}
         </Card>
     )

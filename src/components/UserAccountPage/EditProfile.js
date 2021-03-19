@@ -17,6 +17,10 @@ import CheckIcon from '@material-ui/icons/Check';
 const useStyles = makeStyles((theme)=>({
       name: {
           display: "flex",
+      },
+      column: {
+          display: "flex",
+          flexDirection: "column"
       }
 }))
 
@@ -90,6 +94,9 @@ export default ({handleEditChange, onSubmit, data}) => {
                 </Typography>
                 <Input placeholder={bio} inputProps={{ 'aria-label': 'Bio' }} onChange={e=>setBio(e.target.value)}/>
             </CardActions>
+            <IconButton aria-label="check mark" type="submit" onClick={submit}>
+                <CheckIcon />
+            </IconButton>
         </Card>
         // </div>
     )
