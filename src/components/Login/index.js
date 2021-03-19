@@ -40,6 +40,7 @@ export default function Login({onSubmit, error}) {
     const [password, setPassword] = useState("");
     const [hikers, setHikers] = useState([])
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
+    const [value, setValue] = useState("");
     
       const submit = async event => {
         event.preventDefault()
@@ -71,7 +72,17 @@ export default function Login({onSubmit, error}) {
 
     useEffect(() => {
         searchProduct()
+
+
+        setValue("React is awesome!");
+
     }, [])
+
+
+    console.log(value) // "" 
+
+
+
 
     return (
       <div>

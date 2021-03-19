@@ -19,6 +19,7 @@ import {
     IconButton,
     Input
   } from "@material-ui/core";
+import { Route53Resolver } from 'aws-sdk';
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -58,23 +59,32 @@ export default function UserAccountPage({username}) {
     const [loading, setLoading] = useState(1)
     const [num, setNum] = useState(0)
     const [newHiker, setNewHiker] = useState({})
+    const [newAge, setNewAge] = useState("")
+    const [newFirstName, setNewFirstName] = useState("")
+    const [newLastName, setNewLastName] = useState("")
+    const [newGender, setNewGender] = useState("")
+    const [newUserName, setNewUserName] = useState("")
+    const [newEmail, setNewEmail] = useState("")
+    const [imageUrl, setImageUrl] = useState("")
+    const [newFavouritesHikes, setNewFavouritesHikes] = useState("")
+    
+    const [hikersId, setHikersId] = useState("")
+
 
     const submit = s => {
-        s.preventDefault()
-        //Update product
-        fetch( url + '/hikers', {
-            method: 'PUT',
-            body: JSON.stringify({ newHiker }),
-            headers: { 'Content-Type': 'application/json'}
-        })
-        //update body
-        .then(response => response.json())
-        .then(() => { displaySettings ()} )
-        console.log('Hikers sent')
-        console.log({ newHiker })
+            s.preventDefault()
+            console.log({newHiker})
+             fetch( url + '/hikers', {
+                method: 'PUT',
+                body: JSON.stringify(newHiker),
+                headers: { 'Content-Type': 'application/json'}
+            })
+            //update body
+            .then(response => (response.json(), console.log(response)))
+            .then(() => { displaySettings ()} )
     }
 
-    
+
     const displaySettings = async () => {
     fetch(`${url}/hikers/${state.username}`)
     .then(response => response.json())
@@ -82,9 +92,7 @@ export default function UserAccountPage({username}) {
         setHiker(data)
         setLoading(0)
     })
-        console.log({hiker})
     }   
-
 
     
 const deleteItem = s => {
@@ -100,10 +108,17 @@ const deleteItem = s => {
 
     useEffect(() => {
             displaySettings()
-            console.log({ hiker })
+            setHikersId(hiker[0].hikersId)
     }, [])
 
-    console.log({hiker})
+    useEffect(() => {
+        setNewHiker({hikers: { hikersId: hikersId, age: newAge, firstName: newFirstName, lastName: newLastName, favouritesHikes: "test", imageUrl: "test", gender: newGender }} )
+    }, [newAge, newFirstName])
+
+    // useEffect(() => {
+    //     setHikersId(hiker[0].hikersId)
+    // }, [hiker])
+
 
     return (
         <div>
@@ -114,26 +129,32 @@ const deleteItem = s => {
                 <form onSubmit={submit} >   
 
                 <h4>Update Hiker</h4>
-                {/* Only works when uncommenting after initial load */}
                 
-                {hiker.map(hiker => (
+                {hiker.map(hiker => ( 
                 <div>
                 <div className="control">
-                    <label>Username: </label>
-                    <input type="text" className="input" id="userName"
-                    name="hiker[userName]"
-                    value={newHiker.userName} onChange={e => setNewHiker({...hiker, userName: e.target.value } )}/>
+                    <label>First Name: </label>
+                    <input type="text" className="input" id="firstName"
+                    name="hiker[firstName]"
+                    placeholder={hiker.firstName} onChange={e => setNewFirstName(e.target.value) }/>
+                </div> 
+                <div className="control">
+                    <label>Last Name: </label>
+                    <input type="text" className="input" id="lastName"
+                    name="hiker[lastName]"
+                    placeholder={hiker.lastName} onChange={e => setNewLastName(e.target.value) }/>
                 </div> 
                  <div className="control">
                     <label>Age: </label>
                     <input type="text" className="input" id="age"
-                    name="hiker[age]" value={newHiker.age} onChange={e => setNewHiker({ ...newHiker, age: e.target.value })}/>
+                    name="hiker[age]" placeholder={hiker.age} onChange={e => setNewAge( e.target.value )}/>
                 </div>
-                {/* <div className="control">
-                    <label>Product Price: </label>
-                    <input type="text" className="input" id="productPrice"
-                    name="product[productName]" value={product.productPrice} onChange={e => setProduct({ ...product, productPrice: e.target.value })}/>
-                </div> */}
+                <div className="control">
+                    <label>Gender: </label>
+                    <input type="text" className="input" id="gender"
+                    name="hiker[gender]" placeholder={hiker.gender} onChange={e => setNewGender( e.target.value )}/>
+                </div>
+
                 <div className="control">
                     <input type="submit" name="update" className="button is-black"/>
                 </div>
