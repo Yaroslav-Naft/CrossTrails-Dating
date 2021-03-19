@@ -63,11 +63,8 @@ export default function UserAccountPage({username}) {
     const [newFirstName, setNewFirstName] = useState("")
     const [newLastName, setNewLastName] = useState("")
     const [newGender, setNewGender] = useState("")
-    const [newUserName, setNewUserName] = useState("")
-    const [newEmail, setNewEmail] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
+    const [newImageUrl, setNewImageUrl] = useState("")
     const [newFavouritesHikes, setNewFavouritesHikes] = useState("")
-    
     const [hikersId, setHikersId] = useState("")
 
 
@@ -108,16 +105,21 @@ const deleteItem = s => {
 
     useEffect(() => {
             displaySettings()
-            setHikersId(hiker[0].hikersId)
+            // setHikersId(hiker[0].hikersId)
     }, [])
 
     useEffect(() => {
-        setNewHiker({hikers: { hikersId: hikersId, age: newAge, firstName: newFirstName, lastName: newLastName, favouritesHikes: "test", imageUrl: "test", gender: newGender }} )
-    }, [newAge, newFirstName])
+        setNewHiker({hikers: { hikersId: hikersId, age: newAge, firstName: newFirstName, lastName: newLastName, favouritesHikes: newFavouritesHikes, imageUrl: newImageUrl, gender: newGender }} )
+    }, [newAge, newFirstName, newLastName, newFavouritesHikes, newGender, newImageUrl, hikersId ])
 
-    // useEffect(() => {
-    //     setHikersId(hiker[0].hikersId)
-    // }, [hiker])
+    useEffect(() => {
+        try{
+            setHikersId(hiker[0].hikersId)
+        } catch(error){
+            console.log(error)
+        }
+        console.log({hiker})
+    }, [hiker[0]])
 
 
     return (
@@ -154,7 +156,16 @@ const deleteItem = s => {
                     <input type="text" className="input" id="gender"
                     name="hiker[gender]" placeholder={hiker.gender} onChange={e => setNewGender( e.target.value )}/>
                 </div>
-
+                <div className="control">
+                    <label>Favourite Hikes: </label>
+                    <input type="text" className="input" id="favouritesHikes"
+                    name="hiker[favouritesHikes]" placeholder={hiker.favouritesHikes} onChange={e => setNewFavouritesHikes( e.target.value )}/>
+                </div>
+                <div className="control">
+                    <label>Image Url: </label>
+                    <input type="text" className="input" id="imageUrl"
+                    name="hiker[imageUrl]" placeholder={hiker.imageUrl} onChange={e => setNewImageUrl( e.target.value )}/>
+                </div>
                 <div className="control">
                     <input type="submit" name="update" className="button is-black"/>
                 </div>
