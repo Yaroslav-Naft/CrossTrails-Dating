@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useNavigate} from 'react'
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
@@ -34,9 +34,13 @@ const useStyles = makeStyles((theme)=>({
 
 export default function Login({onSubmit, error}) {
     const classes = useStyles();
-
+    const history = useHistory();
+    //const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [hikers, setHikers] = useState([])
+    const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
+    const [value, setValue] = useState("");
     
       const submit = async event => {
         event.preventDefault()
@@ -46,6 +50,9 @@ export default function Login({onSubmit, error}) {
             password
           }) 
           console.log("You have sucessfully logged In") 
+          history.push('/account', { username })
+          //history.push("/account",{params: username})
+
         } catch (error) {
           console.log(`You have the following error:`)
           console.log(error)
@@ -54,7 +61,31 @@ export default function Login({onSubmit, error}) {
         onSubmit({type: "login", username, password})
       }
 
+
+      const searchProduct = async () => {
+        fetch(url + '/hikers')
+        .then(response => response.json())
+        .then(data => setHikers(
+            JSON.parse(data.body)
+        ))
+    }
+
+    useEffect(() => {
+        searchProduct()
+
+
+        setValue("React is awesome!");
+
+    }, [])
+
+
+    console.log(value) // "" 
+
+
+
+
     return (
+      <div>
             <Card className={classes.root}>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                     Welcome!
@@ -89,5 +120,6 @@ export default function Login({onSubmit, error}) {
                     </Typography>
                 </CardContent>
             </Card>
+</div>
     )
 }
