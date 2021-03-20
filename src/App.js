@@ -5,6 +5,7 @@ import UserAccountPage from "./components/UserAccountPage";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import './app.css'
 import Settings from "./components/Settings";
+import Likes from "./components/Likes";
 
 
 function App() {
@@ -17,6 +18,7 @@ const username = "yaronaftulyev"
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/signup">Sign up</Link></li>
           <li><Link to="/settings">Settings</Link></li>
+          <li><Link to="/likes">Likes</Link></li>
         </ul>
       </span>
       <Switch>
@@ -34,6 +36,9 @@ const username = "yaronaftulyev"
           </Route>
           <Route path="/hikersDetails/:hikersId">
           <UserAccountPage username={username}></UserAccountPage>
+          </Route>
+          <Route path="/likes">
+          <Likes></Likes>
           </Route>
         <Route path="/">
           <LoginPage onSubmit={(data) => console.log("submit login", data)}/>
