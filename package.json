@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.1",
     "aws-amplify": "^3.3.22",
     "material-auto-rotating-carousel": "^3.0.2",
+    "aws-sdk": "^2.866.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",

@@ -48,6 +48,10 @@ export default function Signup({onSubmit, error}) {
     const [password, setPassword] = useState("");
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
+    const [firstName, setFirstName] = useState("Yaro")
+    const [lastName, setLastName] = useState("Naft")
+    const [favouritesHikes, setFavouritesHikes] = useState(["garibaldi","sasamat","buntzen"])
+
 
     const ageOptions = []
     for (let i = 18; i < 60; i++){
@@ -64,6 +68,11 @@ export default function Signup({onSubmit, error}) {
             password,
             attributes: {
               email: email,
+              'custom:age': age.toString(),
+              'custom:gender': gender.toString(),
+              'custom:firstName': firstName.toString(),
+              'custom:lastName': lastName.toString(),
+              'custom:favouritesHikes': favouritesHikes.toString()
             }
           })
           console.log("You have sucessfully signed up")
