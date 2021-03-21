@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme)=>({
       column: {
           display: "flex",
           flexDirection: "column"
+      },
+      leftContainer: {
+          maxWidth: "50%"
       }
 }))
 
@@ -39,24 +42,11 @@ export default ({handleEditChange, onSubmit, data}) => {
         e.preventDefault()
         onSubmit({firstName,lastName})
     }
-    // console.log(data)
-    
-    const editUserProfile = () => {
-        
-    }
+
 
     return (
-        // <div className={classes.name}>
-        //         <div onClick={()=> handleEditChange()}>Go Back</div>
-        //         <Input placeholder={firstName} inputProps={{ 'aria-label': 'First Name' }} onChange={e=>setFirstName(e.target.value)}/>
-        //         <Input placeholder={lastName} inputProps={{ 'aria-label': 'Last Name' }} onChange={e=>setLastName(e.target.value)}/>
-        //         <IconButton aria-label="check mark" type="submit" onClick={submit}>
-        //             <CheckIcon />
-        //         </IconButton>
-        
-
         <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea >
                 <CardContent className={classes.leftContainer}>
                 </CardContent>
             </CardActionArea>
@@ -67,8 +57,6 @@ export default ({handleEditChange, onSubmit, data}) => {
                 <Input placeholder={lastName} inputProps={{ 'aria-label': 'Last Name' }} onChange={e=>setLastName(e.target.value)}/>
                 </div>
                     <Input placeholder={age} inputProps={{ 'aria-label': 'Age' }} onChange={e=>setAge(e.target.value)}/>
-                    <Input placeholder={location} inputProps={{ 'aria-label': 'Location' }} onChange={e=>setLocation(e.target.value)}/>
-
                     <Typography variant="subtitle1" component="subtitle1">
                         Favourite Hikes
                     </Typography>
@@ -98,6 +86,5 @@ export default ({handleEditChange, onSubmit, data}) => {
                 <CheckIcon />
             </IconButton>
         </Card>
-        // </div>
     )
 }
