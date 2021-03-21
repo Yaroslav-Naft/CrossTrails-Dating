@@ -148,7 +148,6 @@ useEffect(() => {
 
                 <h2>All likes for current User</h2>
 
-
                 <table>
                 <thead>
                     <tr>
@@ -165,11 +164,7 @@ useEffect(() => {
                 </tbody>
             </table>
                 
-                
                 <Button onClick={getLike}>Get Like</Button>
-
-                
-
 
         </div>
     )
