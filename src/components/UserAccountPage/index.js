@@ -17,13 +17,14 @@ import {
     ListItem,
     ListItemText,
     IconButton,
-    Input
+    Input,
+    CardMedia
   } from "@material-ui/core";
 import { Route53Resolver } from 'aws-sdk';
 
 const useStyles = makeStyles((theme)=>({
     root: {
-        maxWidth: "1116px",
+        width: "1280px",
         height: "699px",
         backgroundColor: "#F8F8F8",
         display: "flex",
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme)=>({
       }
       
 }))
+
 
 export default function UserAccountPage({username}) {
 
@@ -123,6 +125,78 @@ const deleteItem = s => {
 
 
     return (
+      
+//        <Card className={classes.root}>
+//             <CardActionArea>
+//                 <CardContent className={classes.leftContainer}>
+//                     <IconButton aria-label="add photo">
+//                         <AddAPhotoIcon />
+//                     </IconButton>
+//                 </CardContent>
+//             </CardActionArea>
+
+//             {editMode ? (
+//                 <EditProfile onSubmit={(data) => console.log("submit info", data)} handleEditChange={handleEditChange}/>
+//             )
+//             : (
+//             <CardContent className={classes.column}>
+//                 <div className={classes.row}>
+//                     <Typography gutterBottom variant="h4" component="h2">
+//                         {firstName} {lastName}
+//                     </Typography>
+//                     <IconButton aria-label="editing" >
+//                         <EditIcon onClick={handleEditChange}/>
+//                     </IconButton>
+//                 </div>
+//                     <Typography gutterBottom variant="h6" component="h2">
+//                         Age {age} {location}
+//                     </Typography>
+
+//                     <Typography variant="subtitle1" component="subtitle1">
+//                         Favourite Hikes
+//                     </Typography>
+//                     <List className={classes.column}>
+//                         <ListItem>
+//                             <ListItemText>
+//                                 {favouriteHikes}
+//                             </ListItemText>
+//                         </ListItem>
+//                         <ListItem>
+//                             <ListItemText>
+//                                 {favouriteHikes}
+//                             </ListItemText>
+//                         </ListItem>
+//                         <ListItem>
+//                             <ListItemText>
+//                                 {favouriteHikes}
+//                             </ListItemText>
+//                         </ListItem>
+//                     </List>
+//                 <Typography gutterBottom variant="h6" component="h2">
+//                     Bio
+//                 </Typography>
+//                 <Typography variant="body2" color="textSecondary" component="p">
+//                      {bio}
+//                 </Typography>
+//                 <Typography gutterBottom variant="h6" component="h2">
+//                     Highlights
+//                 </Typography>
+//                 <div>
+//                     <CardMedia
+//                         className={classes.cover}
+//                         image=""
+//                         title="Highlight 1"
+//                     />
+//                     <CardMedia
+//                         className={classes.cover}
+//                         image=""
+//                         title="Highlight 2"
+//                     />
+//                 </div>
+//             </CardContent>
+//             )}
+//         </Card> 
+      
         <div>
         {loading === 1
         ? (<p>Loading</p>) : (
