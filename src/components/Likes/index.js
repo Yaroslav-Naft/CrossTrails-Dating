@@ -54,6 +54,31 @@ const addLike = s => {
     //.then(() => { displaySettings ()} )
 }
 
+//with no path
+// const getLike = async () => {
+//     fetch(url + '/likes')
+//     .then(response => response.json())
+//     .then(data => setHikers(
+//         JSON.parse(data.body)
+//     ))
+// }
+
+
+//with path
+const getLike = async () => {
+    fetch(`${url}/likes/${senderUserName}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log({data})
+        //setHiker(data)
+        //setLoading(0)
+    })
+    }   
+
+
+
+
+
 useEffect( async () => {
     await Auth.currentAuthenticatedUser({
         bypassCache: false
@@ -63,12 +88,12 @@ useEffect( async () => {
     .then( console.log('now running'))
     .catch();
 
-    setLike({like: { senderUserName: senderUserName, targetUserName: 'jacqueline' }} )
+    setLike({like: { senderUserName: senderUserName, targetUserName: 'maria' }} )
 
 }, [])
 
 useEffect(() => {
- setLike({like: { senderUserName: senderUserName, targetUserName: 'jacqueline' }} )
+ setLike({like: { senderUserName: senderUserName, targetUserName: 'maria' }} )
 }, [senderUserName])
 
 console.log({senderUserName})
@@ -76,11 +101,13 @@ console.log({like})
 
     return (
         <div>
-                <TextField>John</TextField>
+                <Button onClick={addLike}>Add Like</Button>
+
+                <h2>All likes for current User</h2>
                 
+                <Button onClick={getLike}>Get Like</Button>
 
 
-                <Button onClick={addLike}>Submit</Button>
         </div>
     )
 }
