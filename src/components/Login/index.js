@@ -40,7 +40,6 @@ export default function Login({onSubmit, error}) {
     const [password, setPassword] = useState("");
     const [hikers, setHikers] = useState([])
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
-    const [value, setValue] = useState("");
     
       const submit = async event => {
         event.preventDefault()
@@ -61,6 +60,15 @@ export default function Login({onSubmit, error}) {
         onSubmit({type: "login", username, password})
       }
 
+      async function signOut() {
+        try {
+            await Auth.signOut();
+        } catch (error) {
+            console.log('error signing out: ', error);
+        }
+    }
+
+
 
       const searchProduct = async () => {
         fetch(url + '/hikers')
@@ -70,19 +78,21 @@ export default function Login({onSubmit, error}) {
         ))
     }
 
+    // useEffect(() => {
+    //     searchProduct()
+    //     Auth.currentSession()
+    //     .then(data => console.log(data))
+    //     .catch(err => console.log(err));
+    // }, [])
+
     useEffect(() => {
-        searchProduct()
-
-
-        setValue("React is awesome!");
-
-    }, [])
-
-
-    console.log(value) // "" 
-
-
-
+      Auth.currentAuthenticatedUser({
+        bypassCache: true  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    }).then(user => console.log(user))
+    .catch(err => console.log(err));
+    const { attributes } = Auth.currentAuthenticatedUser();
+    console.log({attributes})
+  }, [])
 
     return (
       <div>
@@ -119,6 +129,7 @@ export default function Login({onSubmit, error}) {
                        Don't have an account? <Link to="/signup">Sign up</Link>
                     </Typography>
                 </CardContent>
+                <Button onClick={signOut}>Sign out</Button>
             </Card>
 </div>
     )
