@@ -52,7 +52,12 @@ const [liked, setLiked] = useState(true)
 
 
 
-const addLike = e => {
+function addLike(hiker, e){
+
+
+  //console.log(hiker)
+  setTargetUserName(hiker)
+  console.log({targetUserName})
     e.preventDefault()
     //setTargetUserName(e)
      fetch( url + '/likes', {
@@ -225,7 +230,7 @@ useEffect(() => {
                 </CardContent>
                   <CardActions>
                 
-                  <IconButton size="small" color="primary"  onClick={addLike}>
+                  <IconButton size="small" color="primary"  onClick={(e) => addLike(hiker.userName, e)}>
                     {liked ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}
                   </IconButton>
                   </CardActions>
