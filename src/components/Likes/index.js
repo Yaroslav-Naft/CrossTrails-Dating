@@ -53,8 +53,6 @@ const [liked, setLiked] = useState(true)
 
 
 function addLike(hiker, e){
-
-
   //console.log(hiker)
   setTargetUserName(hiker)
   console.log({targetUserName})
@@ -230,7 +228,7 @@ useEffect(() => {
                 </CardContent>
                   <CardActions>
                 
-                  <IconButton size="small" color="primary"  onClick={(e) => addLike(hiker.userName, e)}>
+                  <IconButton size="small" color="primary"  onClick={(e) => {addLike(hiker.userName, e)}}>
                     {liked ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}
                   </IconButton>
                   </CardActions>
