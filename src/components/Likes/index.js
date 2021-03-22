@@ -54,7 +54,7 @@ const [liked, setLiked] = useState(true)
 
 const addLike = e => {
     e.preventDefault()
-    setTargetUserName(e)
+    //setTargetUserName(e)
      fetch( url + '/likes', {
         method: 'PUT',
         body: JSON.stringify( like ),
@@ -113,11 +113,11 @@ const deleteLike = s => {
 }
 
 
-function settingLikes(e) {
-setTargetUserName(e)
-console.log(targetUserName)
-addLike
-}
+// function settingLikes(e) {
+// setTargetUserName(e)
+// console.log(targetUserName)
+// //addLike
+// }
 
 
 
@@ -225,7 +225,7 @@ useEffect(() => {
                 </CardContent>
                   <CardActions>
                 
-                  <IconButton size="small" color="primary"  onClick={addLike(hiker.userName)}>
+                  <IconButton size="small" color="primary"  onClick={addLike}>
                     {liked ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}
                   </IconButton>
                   </CardActions>
