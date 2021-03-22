@@ -3,7 +3,6 @@ import LoginPage from "./components/LoginPage/index"
 import SignupPage from "./components/SignupPage/index"
 import UserAccountPage from './components/UserAccountPage/index'
 import MatchPage from './components/MatchPage/index'
-import UserAccountPage from "./components/UserAccountPage";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import './app.css'
 import Settings from "./components/Settings";

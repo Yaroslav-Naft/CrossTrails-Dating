@@ -91,12 +91,12 @@ console.log(hikers)
                   <Typography variant="body2" color="textSecondary" component="p">
                     {hiker.age}
                   </Typography>
+                </CardContent>
                   <CardActions>
                   <IconButton size="small" color="primary">
                     {liked ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}
                   </IconButton>
                   </CardActions>
-                </CardContent>
               
             </Card>
             )}

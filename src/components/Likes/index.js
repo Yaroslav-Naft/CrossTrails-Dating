@@ -3,32 +3,35 @@ import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
-import {
-    Card,
-    CardContent,
-    Button,
-    TextField,
-    Typography,
-  } from "@material-ui/core";
+import {Card, CardActionArea, CardHeader ,CardMedia,CardContent,CardActions ,IconButton, Typography, Button} from '@material-ui/core';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
   const useStyles = makeStyles((theme)=>({
-    root:{
-        maxWidth: "400px",
-        maxHeight: "464px",
-        padding: "48px 40px",
-    },
-    input: {
-      marginBottom: 10,
-      borderRadius: "50%"
-    },
-    inputForm: {
-      '& > *': {
-        margin: "24px 0"
+    root: {
+        width: "250px",
+        height: "400px",
+        margin: "10px 5px",
+        padding: "10px"
       },
-    },
-    title:{
-        marginLeft: 20,
-    }
+      row: {
+          display: "flex",
+          flexWrap: "wrap",
+      },
+      column: {
+          display: "flex",
+          flexDirection: "column"
+      },
+      card: {
+        maxWidth: "250px",
+        height: "500px",
+        borderRadius: "15px"
+      },
+      media: {
+        width: "245px",
+        height: "200px"
+      }
+    
 }))
 
 
@@ -42,9 +45,16 @@ const [senderUserName, setSenderUserName] = useState("sender Username")
 const [targetUserName, setTargetUserName] = useState("target Username")
 const [likesList, setLikesList] = useState([])
 const [deleteLikesId, setDeleteLikesId] = useState("1f042a70-89fd-11eb-b826-0f0160bc07dc")
+const [hikers, setHikers] = useState([])
+const [loading, setLoading] = useState(0)
+const [liked, setLiked] = useState(true)
 
-const addLike = s => {
-    s.preventDefault()
+
+
+
+const addLike = e => {
+    e.preventDefault()
+    setTargetUserName(e)
      fetch( url + '/likes', {
         method: 'PUT',
         body: JSON.stringify( like ),
@@ -103,6 +113,13 @@ const deleteLike = s => {
 }
 
 
+function settingLikes(e) {
+setTargetUserName(e)
+console.log(targetUserName)
+addLike
+}
+
+
 
 //with path
 const getLike = async () => {
@@ -124,6 +141,14 @@ const getLike = async () => {
     }, [likesList])
 
 
+    const displayUserCard = async event => {
+        fetch(`${url}/hikers`)
+        .then(response => response.json())
+        .then(data => {
+            setHikers(JSON.parse(data.body))
+            setLoading(1)
+        })
+    }
 
 useEffect( async () => {
     await Auth.currentAuthenticatedUser({
@@ -133,13 +158,18 @@ useEffect( async () => {
     )
     .catch();
 
-    setLike({like: { senderUserName: senderUserName, targetUserName: 'maria' }} )
-
+    setLike({like: { senderUserName: senderUserName, targetUserName: targetUserName }} )
 }, [])
 
 useEffect(() => {
- setLike({like: { senderUserName: senderUserName, targetUserName: 'maria' }} )
-}, [senderUserName])
+    displayUserCard()
+}, [])
+
+
+
+useEffect(() => {
+ setLike({like: { senderUserName: senderUserName, targetUserName: targetUserName }} )
+}, [senderUserName, targetUserName])
 
 
     return (
@@ -165,6 +195,47 @@ useEffect(() => {
             </table>
                 
                 <Button onClick={getLike}>Get Like</Button>
+
+                <div className={classes.row}>
+    {loading === 0 ? (<p>Loading...</p>)
+      :(
+        <>
+        {hikers.map(hiker => 
+        <Card className={classes.root}>
+              <CardActionArea>
+                {/* <CardMedia
+                  className={classes.media}
+                  src={hiker.imageUrl}
+                  title="User Profile"
+                /> */}
+                <CardMedia 
+                  className={classes.media}
+                  square 
+                  imageUrl='https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg' 
+                  
+                  />
+                  </CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {hiker.firstName} {hiker.lastName}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {hiker.age}
+                  </Typography>
+                </CardContent>
+                  <CardActions>
+                
+                  <IconButton size="small" color="primary"  onClick={addLike(hiker.userName)}>
+                    {liked ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}
+                  </IconButton>
+                  </CardActions>
+              
+            </Card>
+            )}
+        </>
+      )
+    }
+    </div>
 
         </div>
     )
