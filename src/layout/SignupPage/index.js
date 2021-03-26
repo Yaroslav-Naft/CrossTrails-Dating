@@ -1,16 +1,16 @@
 import React from 'react'
-import LoginForm from '../Login/index'
+import SignupForm from '../../components/Signup/index'
 import BGphoto from "../../assets/BgPhotos/hike_couple.jpg"
 import './style.css'
 
-export default function LoginPage({onSubmit}) {
+export default function SignupPage({onSubmit}) {
     return (
         <div className="mainCard">
             <div className="imgContainer">
                 <img src={BGphoto} className="img"/>
             </div>
             <div className="formContainer">
-                <LoginForm onSubmit={(data) => console.log("submit login", data)}/>
+                <SignupForm onSubmit={(data) => console.log("submit signup", data)}/>
             </div>
         </div>
     )
