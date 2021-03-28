@@ -3,20 +3,15 @@ import { useHistory } from "react-router";
 import { useLocation } from 'react-router-dom';
 import EditProfile from './EditProfile'
 import { makeStyles } from "@material-ui/core/styles";
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import EditIcon from '@material-ui/icons/Edit';
 import {
     Card,
     CardContent,
-    CardActionArea,
     Typography,
-    CardActions,
-    List,
-    ListItem,
-    ListItemText,
     IconButton,
-    Input,
-    CardMedia
+    CardMedia,
+    Avatar,
+    CardHeader
   } from "@material-ui/core";
 
 
@@ -28,9 +23,8 @@ const useStyles = makeStyles((theme)=>({
       },
       column: {
           display: "flex",
-          alignItems: "start",
+          alignItems: "center",
           flexDirection: "column",
-          width: "50%"
       },
       row: {
           display: "flex",
@@ -40,8 +34,16 @@ const useStyles = makeStyles((theme)=>({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "50%"
-      }
+      },
+      large: {
+          width: 150,
+          height: 150,
+          fontSize: 50,
+      },
+      editIcon: {
+        zIndex: 100,
+      },
+
       
 }))
 
@@ -107,69 +109,43 @@ export default function UserAccountPage({user}) {
         } catch(error){
             console.log(error)
         }
-        //console.log({hiker})
     }, [hiker[0]])
-
-    // console.log(user["cognito:username"])
 
 
     return (
         <>
       {loading === 1 ? (<p>loading...</p>) : (
-          <Card className={classes.root}>
-        {/* <CardActionArea>
-            <CardContent className={classes.leftContainer}>
-                <IconButton aria-label="add photo">
-                    <AddAPhotoIcon />
-                </IconButton>
+        <Card className={classes.root}>
+            {editing === 1 ? (
+                <EditProfile onSubmit={(data) => console.log("submit info", data)} handleEditChange={handleEditChange}></EditProfile>
+            )
+            : (
+        <>
+            <CardContent className={classes.column}>
+                <div className={classes.row}>
+                    <CardMedia>
+                        <Avatar alt={hiker[0].firstName} src="/static/images/avatar/1.jpg" className={classes.large} /> 
+                    </CardMedia>
+                    <IconButton aria-label="edit" onClick={handleEditChange}>
+                        <EditIcon />
+                    </IconButton>
+                </div>
+                <div className={classes.row}>
+                    <Typography gutterBottom variant="h4" component="h2">
+                        {hiker[0].firstName} {hiker[0].lastName}
+                    </Typography>
+                </div>
+                    <Typography gutterBottom variant="h6" component="h2">
+                        Age: {hiker[0].age} Gender: {hiker[0].gender}
+                    </Typography>
+                    <Typography variant="subtitle1" component="subtitle1">
+                        Favourite Hikes
+                    </Typography>
+                    <Typography variant="subtitle1" component="subtitle1">
+                        {hiker[0].favouritesHikes}
+                    </Typography>
             </CardContent>
-        </CardActionArea> */}
-
-        {editing === 1 ? (
-            <EditProfile onSubmit={(data) => console.log("submit info", data)} handleEditChange={handleEditChange}/>
-        )
-        : (
-        <CardContent className={classes.column}>
-            <div className={classes.row}>
-                <Typography gutterBottom variant="h4" component="h2">
-                    {hiker[0].firstName} {hiker[0].lastName}
-                </Typography>
-                <IconButton aria-label="editing" >
-                    <EditIcon onClick={handleEditChange}/>
-                </IconButton>
-            </div>
-                <Typography gutterBottom variant="h6" component="h2">
-                    Age: {hiker[0].age} Gender: {hiker[0].gender}
-                </Typography>
-
-                <Typography variant="subtitle1" component="subtitle1">
-                    Favourite Hikes
-                </Typography>
-                <Typography variant="subtitle1" component="subtitle1">
-                    {hiker[0].favouritesHikes}
-                </Typography>
-            <Typography gutterBottom variant="h6" component="h2">
-                Bio
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                 {hiker.bio}
-            </Typography>
-            <Typography gutterBottom variant="h6" component="h2">
-                Highlights
-            </Typography>
-            <div>
-                <CardMedia
-                    className={classes.cover}
-                    image=""
-                    title="Highlight 1"
-                />
-                <CardMedia
-                    className={classes.cover}
-                    image=""
-                    title="Highlight 2"
-                />
-            </div>
-        </CardContent>
+        </>
         )}
     </Card> 
     )}

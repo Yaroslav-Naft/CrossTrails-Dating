@@ -45,12 +45,6 @@ export default function UserCards() {
   const [loading, setLoading] = useState(0)
   const [liked, setLiked] = useState(true)
 
-    
-  const handleLike = () => {
-    
-  };
-  
-
 
 useEffect(() => {
     displayUserCard()

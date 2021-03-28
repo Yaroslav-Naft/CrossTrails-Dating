@@ -67,24 +67,12 @@ export default function Login({ onSubmit, error}) {
         }
     }
 
-    
-
-
-    //   const searchProduct = async () => {
-    //     fetch(url + '/hikers')
-    //     .then(response => response.json())
-    //     .then(data => setHikers(
-    //         JSON.parse(data.body)
-    //     ))
-    // }
-
-    useEffect(() => {
+useEffect(() => {
       Auth.currentAuthenticatedUser({
         bypassCache: true  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
     }).then(user => console.log(user))
     .catch(err => console.log(err));
     const { attributes } = Auth.currentAuthenticatedUser();
-    //console.log({attributes})
   }, [])
 
     return (
