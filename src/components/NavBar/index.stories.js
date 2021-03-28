@@ -1,14 +1,27 @@
+
 import React from 'react'
-import NavBar from './index'
+import { actions } from '@storybook/addon-actions'
 
+import PageHeader from './index'
 
-// 3
 export default {
-  title: 'NavBar',
-  component: NavBar,
+  title: 'Page Header',
+  component: PageHeader,
 }
 
-// 4
-export const Default = () => (
-  <NavBar ></NavBar>
+const events = actions({ titleClicked: "title clicked", signOut: 'sign out', newPost: "new post", profile: "profile", onSearch: "search", login: "login"})
+
+export const LoggedIn = () => (
+  <PageHeader 
+  title="Cross Trail"
+  {...events}
+  user={true}
+  ></PageHeader>
+)
+
+export const LoggedOut = () => (
+  <PageHeader 
+  title="Cross Trail"
+  {...events}
+  ></PageHeader>
 )

@@ -3,7 +3,8 @@ import './style.css'
 
 export default function BackgroundCard() {
     return (
-        <div className="mainCard">
+        // <div className="mainCard">
+        <div>
             
         </div>
     )
