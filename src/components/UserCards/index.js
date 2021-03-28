@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, CardActionArea ,CardMedia,CardContent,CardActions ,IconButton, Typography, Button} from '@material-ui/core';
+import {Card, CardActionArea ,CardMedia,CardContent,CardActions ,IconButton, Typography} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
@@ -80,12 +80,12 @@ const displayUserCard = async event => {
                   src={hiker.imageUrl}
                   title="User Profile"
                 /> */}
-                <CardMedia 
+                {/* <CardMedia 
                   className={classes.media}
                   square 
                   >
                     <img src={hiker.imageUrl} className={classes.cardImage}/>
-                  </CardMedia>
+                </CardMedia> */}
                   </CardActionArea>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">

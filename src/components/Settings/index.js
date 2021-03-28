@@ -7,7 +7,7 @@ export default function Settings() {
 const history = useHistory()
 const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
 const [hiker, setHiker] = useState([])
-const hikersId = "2"
+
 
 
 
@@ -32,17 +32,6 @@ const submit = s => {
     .then(() => { displaySettings () } )
     history.push("/")
 }
-
-// const deleteItem = s => {
-//     s.preventDefault()
-//     //pass product
-//     fetch(API_INVOKE_URL + `/products/${productId}`, {
-//         method: 'DELETE',
-//         body: JSON.stringify({ product }),
-//         headers: { 'Content-Type': 'application/json'}
-//     })
-//     history.push("/")
-// }
 
 
 useEffect(() => {

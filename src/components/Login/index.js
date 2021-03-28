@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useNavigate} from 'react'
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
@@ -32,13 +32,12 @@ const useStyles = makeStyles((theme)=>({
     }
 }))
 
-export default function Login({onSubmit, error}) {
+export default function Login({ onSubmit, error}) {
     const classes = useStyles();
     const history = useHistory();
     //const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [hikers, setHikers] = useState([])
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
     
       const submit = async event => {
@@ -68,22 +67,16 @@ export default function Login({onSubmit, error}) {
         }
     }
 
+    
 
 
-      const searchProduct = async () => {
-        fetch(url + '/hikers')
-        .then(response => response.json())
-        .then(data => setHikers(
-            JSON.parse(data.body)
-        ))
-    }
-
-    // useEffect(() => {
-    //     searchProduct()
-    //     Auth.currentSession()
-    //     .then(data => console.log(data))
-    //     .catch(err => console.log(err));
-    // }, [])
+    //   const searchProduct = async () => {
+    //     fetch(url + '/hikers')
+    //     .then(response => response.json())
+    //     .then(data => setHikers(
+    //         JSON.parse(data.body)
+    //     ))
+    // }
 
     useEffect(() => {
       Auth.currentAuthenticatedUser({
@@ -91,7 +84,7 @@ export default function Login({onSubmit, error}) {
     }).then(user => console.log(user))
     .catch(err => console.log(err));
     const { attributes } = Auth.currentAuthenticatedUser();
-    console.log({attributes})
+    //console.log({attributes})
   }, [])
 
     return (
@@ -125,11 +118,11 @@ export default function Login({onSubmit, error}) {
                         {!!error && <Typography>{error}</Typography>}
                         <Button color="primary" type="submit" fullWidth>LOGIN</Button>
                     </form>
-                    <Typography  color="black" gutterBottom>
+                    <Typography  gutterBottom>
                        Don't have an account? <Link to="/signup">Sign up</Link>
                     </Typography>
                 </CardContent>
-                <Button onClick={signOut}>Sign out</Button>
+                {/* <Button onClick={signOut}>Sign out</Button> */}
             </Card>
 </div>
     )

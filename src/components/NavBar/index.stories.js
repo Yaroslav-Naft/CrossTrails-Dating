@@ -13,7 +13,7 @@ const events = actions({ titleClicked: "title clicked", signOut: 'sign out', new
 
 export const LoggedIn = () => (
   <PageHeader 
-  title="Social Something"
+  title="Cross Trail"
   {...events}
   user={true}
   ></PageHeader>
@@ -21,7 +21,7 @@ export const LoggedIn = () => (
 
 export const LoggedOut = () => (
   <PageHeader 
-  title="Social Something"
+  title="Cross Trail"
   {...events}
   ></PageHeader>
 )

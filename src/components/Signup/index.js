@@ -54,7 +54,7 @@ export default function Signup({onSubmit, error}) {
 
 
     const ageOptions = []
-    for (let i = 18; i < 60; i++){
+    for (let i = 18; i < 100; i++){
       ageOptions.push(i)
     }
 

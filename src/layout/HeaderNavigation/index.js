@@ -1,5 +1,4 @@
 import NavBar from '../../components/NavBar/index'
-import BackgroundCard from '../../components/BackgroundCard/index'
 
 import { useHistory } from "react-router-dom"
 
@@ -7,23 +6,25 @@ import { useHistory } from "react-router-dom"
 export default function HeaderNavigation({user, setToken}) {
   const history = useHistory()
 
+  console.log({user})
+
   const signOut = () => {
     // Remove the token from local storage
     setToken("")
-    history.push("/")
+    history.push("/login")
   }
 
   return (
-      <BackgroundCard>
+
         <NavBar
-            title="Social Something"
+            title="Cross Trail"
             titleClicked={() => history.push("/match")}
             user={user}
-            newPost={() => history.push("/setting")}
-            profile={() => history.push("/profile")}
+            userAccount={() => history.push("/setting")}
+            profile={() => history.push("/account")}
             login={() => history.push("/login")}
             signOut={signOut}
             ></NavBar>
-    </BackgroundCard>
+
     )
 }
