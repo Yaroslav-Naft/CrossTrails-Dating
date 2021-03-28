@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import { AppBar, Avatar, Link, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar,  Link, Toolbar, IconButton,  MenuItem, Menu } from '@material-ui/core'
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ChatIcon from '@material-ui/icons/Chat';
 
@@ -58,7 +58,6 @@ export default function PageHeader(props) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [search, setSearch] = useState("")
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -78,12 +77,6 @@ export default function PageHeader(props) {
     handleClose()
     props.profile()
   }
-
-  const onSearch = event => {
-    event.preventDefault()
-    props.onSearch({search})
-  }
-
 
 
   return (
