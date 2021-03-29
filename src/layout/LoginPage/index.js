@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {Auth} from 'aws-amplify'
 import LoginForm from '../../components/Login/index'
 import BGphoto from "../../assets/BgPhotos/hike_couple.jpg"
 import * as network from '../../network'
@@ -38,6 +39,30 @@ export default function LoginPage({setToken}) {
 
     const history = useHistory()
 
+    // const [jwtToken, setJwtToken]=useState("")
+
+  //   async function signIn() {
+  //     try {
+  //         const user = await Auth.signIn(username, password);
+  //     } catch (error) {
+  //         console.log('error signing in', error);
+  //     }
+  // }
+    
+    // useEffect(() => {
+    //   Auth.signIn()
+    //   Auth.currentSession()
+    //   .then(data => {
+    //   const token = data.getAccessToken()
+    //   const jwt = token.getJwtToken()
+    //   setJwtToken(jwt)
+    //   console.log(`jwt: ${jwt}`)
+    // })
+    // .catch(err => console.log(err));
+    // }, [])
+
+    
+
     async function login(details) {
       let result 
       if (details.type === "login") {
@@ -46,7 +71,7 @@ export default function LoginPage({setToken}) {
   
       // Store the JWT into local storage
       setToken(result.accessToken)
-      history.push("/")
+      history.push("/match")
     }
     
     
