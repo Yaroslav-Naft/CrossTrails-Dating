@@ -20,10 +20,12 @@ export default function UserCards() {
   const [loading, setLoading] = useState(0)
   const [like, setLike] = useState(false)
   const [targetUserName, setTargetUserName] = useState("")
+  const [lastDirection, setLastDirection] = useState()
 
-  function handleLike(hiker, e){
+  function handleLike(hiker, lastDirection){
+    if(lastDirection === "right"){
     setTargetUserName(hiker)
-    e.preventDefault()
+    // e.preventDefault()
      fetch( url + '/likes', {
         method: 'PUT',
         body: JSON.stringify( like ),
@@ -32,11 +34,15 @@ export default function UserCards() {
     //update body
     .then(response => (response.json(), console.log(response)))
     .catch(err => console.error(err.message))
+    }
   }
 
-  const swiped = (direction, nameToDelete) => {
+  const swiped = (direction, nameToDelete, hiker) => {
     console.log("removing:" + nameToDelete);
-    //setLastDirection(direction);
+    setLastDirection(direction);
+    console.log(lastDirection)
+    handleLike(lastDirection, hiker)
+    console.log("you swiped" + " " + direction);
   };
   const outOfFrame = (name) => {
     console.log(name + "left the screen");
@@ -65,11 +71,12 @@ useEffect(() => {
         <div className="tinderCards">
           <div className="tinderCards__cardContainer">
             {hikers.map((hiker) => (
+              <>
               <TinderCard
                 className="swipe"
                 key={hiker.hikersId}
                 preventSwipe={["up", "down"]}
-                onSwipe={(dir) => swiped(dir, hiker.firstName)}
+                onSwipe={(dir) => swiped(dir, hiker.firstName, hiker )}
                 onCardLeftScreen={() => outOfFrame(hiker.firstName)}
               >
                 <div
@@ -79,20 +86,22 @@ useEffect(() => {
                   <Typography className="name">{hiker.firstName} {hiker.lastName}</Typography>
                 </div>
               </TinderCard>
+            </>
             ))}
           </div>
         </div>
         </>
       )
-    }
-        <div className="swipeButtons">
-            <IconButton className="swipeButtons__left" >
-              <CloseIcon fontSize="large" />
-            </IconButton>
-            <IconButton className="swipeButtons__right" onClick={(e)=>handleLike(hikers,e)}> 
-              <FavoriteIcon fontSize="large" />
-            </IconButton>
-        </div>
+    }      
     </div>
   )
 }
+
+{/* <div className="swipeButtons">
+              <IconButton className="swipeButtons__left" >
+                <CloseIcon fontSize="large" />
+              </IconButton>
+              <IconButton className="swipeButtons__right" onClick={(e)=>handleLike(hiker,e)}> 
+                <FavoriteIcon fontSize="large" />
+              </IconButton>
+            </div> */}
