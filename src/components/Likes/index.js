@@ -48,7 +48,8 @@ const [deleteLikesId, setDeleteLikesId] = useState("1f042a70-89fd-11eb-b826-0f01
 const [hikers, setHikers] = useState([])
 const [loading, setLoading] = useState(0)
 const [liked, setLiked] = useState(false)
-const [likeBack, setLikeBack] = useState([])
+const [likeBackList, setlikeBackList] = useState([])
+
 
 
 // STEP 1 - handle like user
@@ -77,7 +78,19 @@ const getLike = async () => {
 
 // STEP 3 - see users that liked you back
 // compare senderUsername and targetUsername 
-// filter targetusername and compare to current logged in username
+
+
+const getLikeBack = async () => {
+  // fetch(`${url}/likes/${senderUserName}`)
+  fetch(`${url}/likes/deletelikes/${user["cognito:username"]}`)
+  .then(response => response.json())
+  .then(data => {setlikeBackList(data)})
+  .catch(err => {console.error(err.message)})
+}   
+
+
+
+
 
 
 //with no path
@@ -164,7 +177,7 @@ const getLike = async () => {
                 <table>
                 <thead>
                     <tr>
-                        <th>Users Who Liked you</th>
+                        <th>Users you liked</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -174,25 +187,29 @@ const getLike = async () => {
                 </tr>          
                 )}
                 </tbody>
-                </table>
-                <Button onClick={getLike}>Get Like</Button>
-            <div>
-               <table>
+
+            </table>
+            <table>
                 <thead>
                     <tr>
                         <th>Users Who Liked you back</th>
                     </tr>
                 </thead>
                 <tbody>
-                {likesList.map(l =>
-                <tr key={l.LikesId}> 
-                    <td>{l.senderUserName}</td>
+                {likeBackList.map(like =>
+                <tr key={like.LikesId}> 
+                    <td>{like.SenderUserName}</td>
                 </tr>          
                 )}
                 </tbody>
             </table>
-               <Button onClick="">Get Like</Button>
-              </div> 
+                
+                <Button onClick={getLike}>Get Like</Button>
+                <Button onClick={getLikeBack}>Get Likes list</Button>
+
+
+
+
         </div>
     )
 }
