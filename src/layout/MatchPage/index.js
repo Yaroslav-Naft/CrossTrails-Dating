@@ -4,10 +4,10 @@ import SwipeButtons from '../../components/UserCards/swipeButtons'
 import './matchpage.css'
 
 
-export default function MatchPage() {
+export default function MatchPage({user}) {
     return (
             <div className="cards-wrapper">
-                <UserCards />
+                <UserCards user={user}/>
             </div>
     )
 }
