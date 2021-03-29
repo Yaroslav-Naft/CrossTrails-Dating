@@ -1,12 +1,3 @@
-/* body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(65, 116, 70, 0.65);
-  height: 100vh;
-  overflow-y: hidden;
-} */
-
 /* Box sizing rules */
 *,
 *::before,
@@ -87,8 +78,8 @@ select {
   }
 }
 
-.App {
+/* .App {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
