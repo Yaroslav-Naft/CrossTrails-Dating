@@ -14,7 +14,6 @@ import MatchPage from './layout/MatchPage/index'
 import HeaderNavigation from './layout/HeaderNavigation/index'
 
 
-
 function App() {
 
   const [token, setToken] = useLocalStorage("token");
