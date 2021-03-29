@@ -10,7 +10,7 @@ import {
   } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
-
+import ImageUpload from '../../components/uploadImage/ImageUpload'
   
 const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
 
@@ -80,6 +80,7 @@ export default ({hiker, onClose}) => {
                     <CloseIcon />
                 </IconButton>
                     }>
+            <ImageUpload avatar/>
             <CardContent>
                     <form onSubmit={submit}>
                     <TextField 
