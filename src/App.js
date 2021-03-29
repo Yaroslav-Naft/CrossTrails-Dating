@@ -14,7 +14,6 @@ import MatchPage from './layout/MatchPage/index'
 import HeaderNavigation from './layout/HeaderNavigation/index'
 
 
-
 function App() {
 
   const [token, setToken] = useLocalStorage("token");
@@ -49,8 +48,8 @@ function App() {
               {/* <LoginPage onSubmit={(data) => console.log("submit login", data)} setToken={setToken}></LoginPage> */}
               <LoginPage  setToken={setToken}></LoginPage>
             </Route>
-            <PrivateRoute exact path="/match" >
-              <MatchPage />
+            <PrivateRoute exact path="/match"  >
+              <MatchPage user={user}/>
             </PrivateRoute>
             <PrivateRoute exact path="/settings" >
               <Settings user={user}></Settings>

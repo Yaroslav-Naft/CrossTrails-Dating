@@ -4,59 +4,67 @@ import { useLocation } from 'react-router-dom';
 import EditProfile from './EditProfile'
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from '@material-ui/icons/Edit';
-import {
-    Card,
-    CardContent,
-    Typography,
-    IconButton,
-    CardMedia,
-    Avatar,
-    CardHeader
-  } from "@material-ui/core";
-
+import UserTable from '../../components/Likes/index.js'
+// material ui
+import {Card, CardContent, CardMedia, Avatar, IconButton, Typography} from '@material-ui/core'
 
 const useStyles = makeStyles((theme)=>({
-    root: {
-        marginTop: 100,
-        backgroundColor: "#F8F8F8",
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: 'center',
+  },
+  root: {
+      marginTop: 100,
+      backgroundColor: "#F8F8F8",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: 'center',
+      width: "500px"
+    },
+    column: {
         display: "flex",
-      },
-      column: {
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-      },
-      row: {
-          display: "flex",
-          flexDirection: "row",
-      },
-      leftContainer:{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-      },
-      large: {
-          width: 150,
-          height: 150,
-          fontSize: 50,
-      },
-      editIcon: {
-        zIndex: 100,
-      },
+        alignItems: "center",
+        flexDirection: "column",
+    },
+    row: {
+        display: "flex",
+        flexDirection: "row",
+    },
+    leftContainer:{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    large: {
+        width: 150,
+        height: 150,
+        fontSize: 50,
+    },
+    editIcon: {
+      zIndex: 100,
+    },
+    button: {
+      display: 'flex',
+      color: 'white',
+      backgroundColor: "#323232",
+      padding: "8px",
+      borderRadius: '2px'
+    }
 
-      
+    
 }))
 
 
 
 export default function UserAccountPage({user}) {
-
     const classes = useStyles();
     const [editing, setEditing] = useState(0)
     const history = useHistory()
     const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
     const [hiker, setHiker] = useState()
     const [loading, setLoading] = useState(1)
+
 
 
     function handleEditChange(){
@@ -77,12 +85,9 @@ export default function UserAccountPage({user}) {
         displaySettings()
     }, [])
 
-
-    //console.log(hiker)
-
     return (
-    <>
-        {loading === 1 ? (<p>loading...</p>) : (
+    <div className={classes.container}>
+      {loading === 1 ? (<p>loading...</p>) : (
             <Card className={classes.root}>
                 {editing === 1 ? (
                     <EditProfile hiker={hiker} handleEditChange={handleEditChange}></EditProfile>
@@ -93,9 +98,6 @@ export default function UserAccountPage({user}) {
                         <CardMedia>
                             <Avatar alt={hiker[0].firstName} src={hiker[0].imageUrl} className={classes.large} /> 
                         </CardMedia>
-                        <IconButton aria-label="edit" onClick={handleEditChange}>
-                            <EditIcon />
-                        </IconButton>
                     </div>
                     <div className={classes.row}>
                         <Typography gutterBottom variant="h4" component="h2">
@@ -111,11 +113,20 @@ export default function UserAccountPage({user}) {
                         <Typography variant="subtitle1" component="subtitle1">
                             {hiker[0].favouritesHikes}
                         </Typography>
+                        <IconButton aria-label="edit" onClick={handleEditChange}>
+                          <div className={classes.button}>
+                            <EditIcon />
+                            <Typography >
+                              Setting
+                            </Typography>
+                          </div>
+                        </IconButton>
+                        <UserTable user={user}/>
                 </CardContent>
                     )}
             </Card> 
         )}
-    </>
+    </div>
     
     )
 }

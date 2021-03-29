@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react'
+import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Card,
     CardContent,
     Typography,
     FormLabel,
-    TextField,RadioGroup,MenuItem,Select,Button,FormControlLabel,Radio
+    TextField,RadioGroup,MenuItem,Select,FormControlLabel,Radio,IconButton
   } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import ImageUpload from '../../components/uploadImage/ImageUpload'
+  
 const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
 
 const useStyles = makeStyles((theme)=>({
@@ -20,10 +24,14 @@ const useStyles = makeStyles((theme)=>({
       },
       leftContainer: {
           maxWidth: "50%"
+      },
+      root: {
+          padding: 20
       }
 }))
 
-export default ({hiker}) => {
+export default ({hiker, onClose}) => {
+    const history = useHistory()
     const classes = useStyles();
     const [newAge, setNewAge] = useState("")
     const [newFirstName, setNewFirstName] = useState("")
@@ -35,7 +43,7 @@ export default ({hiker}) => {
     const [newHiker, setNewHiker] = useState({})
 
     const ageOptions = []
-    for (let i = 18; i < 100; i++){
+    for (let i = 18; i < 80; i++){
       ageOptions.push(i)
     }
 
@@ -49,6 +57,7 @@ export default ({hiker}) => {
         })
         //update body
         .then(response => (response.json(), console.log(response)))
+        history.push('/account')
     }
 
     useEffect(() => {
@@ -66,8 +75,12 @@ export default ({hiker}) => {
     //console.log(hiker[0])
 
     return (
-        <div>
-            <Card className={classes.root}>
+            <Card className={classes.root} action={
+                <IconButton aria-label="close" onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
+                    }>
+            <ImageUpload avatar/>
             <CardContent>
                     <form onSubmit={submit}>
                     <TextField 
@@ -87,28 +100,31 @@ export default ({hiker}) => {
                         onChange={e => setNewLastName(e.target.value)}>
                         </TextField>
                         <div>
-                          <FormLabel component="legend">Gender</FormLabel>
+                          <FormLabel component="gender">Gender</FormLabel>
                           <RadioGroup aria-label="gender" name="gender1" onChange={e => setNewGender(e.target.value)}>
                             <FormControlLabel value="female" control={<Radio />} label="Female" />
                             <FormControlLabel value="male" control={<Radio />} label="Male" />
                           </RadioGroup>
-                          <FormLabel component="legend">Age</FormLabel>
-                          <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            onChange={e => setNewAge(e.target.value)}
-                            label="Age"
-                          >
-                            {ageOptions.map((a) => {
-                              return (<MenuItem value={a}>{a}</MenuItem>)
-                            })}
-                          </Select>
+                          <FormLabel component="age">Age</FormLabel>
+                          <TextField 
+                            placeholder={hiker[0].age}
+                            className={classes.input} 
+                            label="age" 
+                            variant="outlined" 
+                            fullWidth
+                            onChange={e => setNewAge(e.target.value)}>
+                            </TextField>
                         </div>
-                        <Button color="primary" type="submit" fullWidth>SUBMIT</Button>
+                        <IconButton type="submit">
+                            <CheckIcon />
+                        </IconButton>
                     </form>
                 </CardContent>
             </Card> 
-                {/* <form onSubmit={submit} >   
+    )
+}
+
+{/* <form onSubmit={submit} >   
                 <h4>Update Hiker</h4>
                 <div>
                 <div className="control">
@@ -147,8 +163,5 @@ export default ({hiker}) => {
                     <input type="submit" name="update" className="button is-black"/>
                 </div>
                 </div>
-                </form>        */}
-            </div>
-    )
-}
-
+                </form>       
+ */}
