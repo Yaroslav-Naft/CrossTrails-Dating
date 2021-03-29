@@ -41,7 +41,7 @@ const history = useHistory();
 const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
 const [like, setLike] = useState( {like: { senderUserName: 'yaro', targetUserName: 'jacqueline' }})
 const [likesId, setLikesId] = useState("")
-const [senderUserName, setSenderUserName] = useState("")
+const [senderUserName, setSenderUserName] = useState(user["cognito:username"])
 const [targetUserName, setTargetUserName] = useState("")
 const [likesList, setLikesList] = useState([])
 const [deleteLikesId, setDeleteLikesId] = useState("1f042a70-89fd-11eb-b826-0f0160bc07dc")
@@ -49,6 +49,7 @@ const [hikers, setHikers] = useState([])
 const [loading, setLoading] = useState(0)
 const [liked, setLiked] = useState(false)
 const [likeBackList, setlikeBackList] = useState([])
+
 
 
 // STEP 1 - handle like user
@@ -73,10 +74,11 @@ const getLike = async () => {
   .then(response => response.json())
   .then(data => {setLikesList(data)})
   .catch(err => {console.error(err.message)})
-}   
+}
 
 // STEP 3 - see users that liked you back
 // compare senderUsername and targetUsername 
+
 
 const getLikeBack = async () => {
   // fetch(`${url}/likes/${senderUserName}`)
@@ -85,6 +87,7 @@ const getLikeBack = async () => {
   .then(data => {setlikeBackList(data)})
   .catch(err => {console.error(err.message)})
 }   
+
 
 
 
@@ -184,6 +187,7 @@ const getLikeBack = async () => {
                 </tr>          
                 )}
                 </tbody>
+
             </table>
             <table>
                 <thead>
@@ -202,6 +206,7 @@ const getLikeBack = async () => {
                 
                 <Button onClick={getLike}>Get Like</Button>
                 <Button onClick={getLikeBack}>Get Likes list</Button>
+
 
 
 

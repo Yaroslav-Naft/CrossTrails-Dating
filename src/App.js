@@ -20,6 +20,8 @@ function App() {
   const [token, setToken] = useLocalStorage("token");
   const [user, setUser] = useState(token ? jwtDecode(token) : null);
 
+  // let jwtToken = token
+
   
   useEffect(() => {
     const user = token ? jwtDecode(token) : null;
@@ -32,10 +34,10 @@ function App() {
     </Route>
   )
 
-  //const username = "nkrachangtoy"
+
 
   return (
-    <div className="App">
+    <div>
       <Router>
         <HeaderNavigation user={user} setToken={setToken}></HeaderNavigation>
         <Switch>
@@ -60,7 +62,7 @@ function App() {
             <UserAccountPage username={user}></UserAccountPage>
             </PrivateRoute> */}
             <PrivateRoute path="/likes">
-            <Likes user={user}></Likes>
+              <Likes user={user}></Likes>
             </PrivateRoute>
           <Route path="/">
             {/* <LoginPage onSubmit={(data) => console.log("submit login", data)}/> */}
@@ -72,4 +74,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
