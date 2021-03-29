@@ -2,11 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './cards.css'
 import TinderCard from 'react-tinder-card'
 import { Typography} from '@material-ui/core';
-// import SwipeButtons from './swipeButtons'
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import CloseIcon from "@material-ui/icons/Close";
-// import {IconButton} from '@material-ui/core';
-// import './swipebuttons.css'
+
 
 
 const url = "https://w4jzml8vu8.execute-api.us-west-1.amazonaws.com/prod"
@@ -56,13 +52,6 @@ export default function UserCards({user}) {
   useEffect(() => {
     displayUserCard()
   }, [])
-
-  // useEffect(() => {
-  // //console.log(targetUserName)
-  //   setLike({like: {  sendUsername: senderUserName, targetUserName: targetUserName }} )
-  // }, [targetUserName])
-
-  //console.log(like)
 
   return (
     <div>
