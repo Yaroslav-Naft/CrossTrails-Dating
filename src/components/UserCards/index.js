@@ -73,7 +73,9 @@ export default function UserCards({user}) {
                   style={{ backgroundImage: " url(" + hiker.imageUrl + ")" }}
                   className="card"
                 >
-                  <Typography className="name">{hiker.firstName} {hiker.lastName}</Typography>
+                  <div className="card__content">
+                    <Typography variant="h4" className="name">{hiker.firstName} {hiker.lastName}</Typography>
+                  </div>
                 </div>
               </TinderCard>
             </>
