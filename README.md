@@ -1,5 +1,30 @@
 ## Crosstrails (Hiker dating web application)
 
+### Installation Instructions
+    - Clone the Repo
+    - Run 'npm install'
+    - In the src folder directory, create a file called
+    config.json and insert the following Code
+```javascript=
+{
+    "cognito": {
+        "REGION": "us-west-1",
+        "USER_POOL_ID": "us-west-1_VJM6VrFOb",
+        "APP_CLIENT_ID": "746n0achoe61nbmh8mpgm141r7"
+        }
+    }
+```
+    - Add the following line to your index.js file in your src folder 
+    
+    
+```javascript=
+    import config from './config.json';
+```
+    
+    - To run the app, type 'npm start' into the command line
+
+
+
 ### Must have
 
     - Like and Rating (0-100%) **
