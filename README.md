@@ -71,5 +71,3 @@
     - Show all users
     - Message matches (RESTful)
     - DynamoDB
-
-### Mock up
