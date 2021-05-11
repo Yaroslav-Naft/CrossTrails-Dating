@@ -14,15 +14,29 @@
         }
     }
 ```
-    - Add the following line to your index.js file in your src folder
-      if it isn't already there
-    
+
+    -Add the following line below to your index.js file in your src folder
+    if it's not already there
+
     
 ```javascript=
     import config from './config.json';
 ```
     
-    - To run the app, type 'npm start' into the command line
+
+    -Due to a current bug, please open the developer console and type `localStorage.clear()` to clear the jwt Token.
+
+    -Due to the current bug with jwt, please use the following credentials below for login
+
+
+
+```
+Username: 
+
+Password: 
+```
+    
+    
 
 
 
