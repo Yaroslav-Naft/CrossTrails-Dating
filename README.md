@@ -14,9 +14,10 @@
         }
     }
 ```
-    - Add the following line to your index.js file in your src folder
-      if it isn't already there
-    
+:::warning
+Add the following line below to your index.js file in your src folder
+if it's not already there
+:::
     
 ```javascript=
     import config from './config.json';
