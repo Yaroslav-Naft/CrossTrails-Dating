@@ -31,9 +31,9 @@
 
 
 ```
-Username: Aiden
+Username: 
 
-Password: !7NusorN1903
+Password: 
 ```
     
     
