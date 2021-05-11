@@ -22,7 +22,22 @@
     import config from './config.json';
 ```
     
-    - To run the app, type 'npm start' into the command line
+:::danger
+Due to a current bug, please open the developer console and type `localStorage.clear()` to clear the jwt Token.
+:::
+
+:::warning
+Due to the current bug with jwt, please use the following credentials for login
+:::
+
+
+```
+Username: Aiden
+
+Password: !7NusorN1903
+```
+    
+    
 
 
 
