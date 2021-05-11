@@ -14,22 +14,20 @@
         }
     }
 ```
-:::warning
-Add the following line below to your index.js file in your src folder
-if it's not already there
-:::
+
+    -Add the following line below to your index.js file in your src folder
+    if it's not already there
+
     
 ```javascript=
     import config from './config.json';
 ```
     
-:::danger
-Due to a current bug, please open the developer console and type `localStorage.clear()` to clear the jwt Token.
-:::
 
-:::warning
-Due to the current bug with jwt, please use the following credentials for login
-:::
+    -Due to a current bug, please open the developer console and type `localStorage.clear()` to clear the jwt Token.
+
+    -Due to the current bug with jwt, please use the following credentials for login
+
 
 
 ```
