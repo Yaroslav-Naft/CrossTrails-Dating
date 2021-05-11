@@ -26,7 +26,7 @@
 
     -Due to a current bug, please open the developer console and type `localStorage.clear()` to clear the jwt Token.
 
-    -Due to the current bug with jwt, please use the following credentials for login
+    -Due to the current bug with jwt, please use the following credentials below for login
 
 
 
