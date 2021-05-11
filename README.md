@@ -14,7 +14,8 @@
         }
     }
 ```
-    - Add the following line to your index.js file in your src folder 
+    - Add the following line to your index.js file in your src folder
+      if it isn't already there
     
     
 ```javascript=
